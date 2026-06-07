@@ -1,0 +1,18 @@
+{
+  "exportedAt": "2026-06-07T05:27:02.358Z",
+  "id": "homeInfo",
+  "oeaCardLink": "https://dh09x5tu10bt3.cloudfront.net/certificates/oea.jpg",
+  "timestamp": {
+    "type": "firestore/timestamp/1.0",
+    "seconds": 1731678893,
+    "nanoseconds": 219000000
+  },
+  "headline": "Construction Engineer | Project Management | QHSE-Quality",
+  "experienceYears": "4",
+  "mainImage": "https://dh09x5tu10bt3.cloudfront.net/avatar.jpg",
+  "homeSummary": "Hi, my name is ZePedro, and I'm a Construction Engineer with 4+ years in project management and nearly 2 years in QHSE-Quality coordination at Mota-Engil Angola.",
+  "qhseExperienceYears": 2,
+  "name": "JOSÉ PEDRO",
+  "motaEngilLink": "https://www.linkedin.com/company/mota-engil-angola/",
+  "showcaseDescription": "This is a showcase of my projects and abilities."
+}
