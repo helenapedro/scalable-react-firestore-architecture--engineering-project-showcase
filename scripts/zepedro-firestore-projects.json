@@ -1,0 +1,1226 @@
+{
+  "exportedAt": "2026-06-07T03:41:22.454Z",
+  "count": 16,
+  "projects": [
+    {
+      "id": "3-story-multifunctional-building",
+      "projectOutcome": "As part of the project, I was responsible for the supervision phase, which included: Monitoring the physical execution of the building’s construction, Cost control and Inventory management. The supervision activities spanned a three-month period.",
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.280Z"
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119132,
+        "nanoseconds": 131000000
+      },
+      "title": "3-Story Multifunctional Building",
+      "metrics": [],
+      "location": "Soyo, Zaire, Angola",
+      "results": [],
+      "period": {
+        "endYear": null,
+        "label": "2019",
+        "startYear": 2019
+      },
+      "media": {
+        "video": null,
+        "images": [
+          "m0.jpeg",
+          "m01.jpeg",
+          "m1.jpeg",
+          "m3.jpeg",
+          "m4.jpeg",
+          "m5.jpeg",
+          "m6.jpeg",
+          "m8.jpeg",
+          "m9.jpeg",
+          "m10.jpg",
+          "m11.jpg",
+          "m12.jpg"
+        ],
+        "mainImage": "m0.jpeg",
+        "thumbnails": []
+      },
+      "responsibilities": [
+        "IT technology and home appliances store",
+        "Office spaces",
+        "Economic nightclub, convertible to a banquet hall",
+        "VIP nightclub with an exclusive VIP area, also convertible to a banquet hall"
+      ],
+      "client": null,
+      "context": "This architectural project features a multifunctional 3-story building, designed and organized with the following layout:",
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "slug": "3-story-multifunctional-building",
+      "organization": "AUTONOMOUS PROJECT",
+      "isVisible": true,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119132,
+        "nanoseconds": 131000000
+      }
+    },
+    {
+      "id": "architectural-project-single-family-home-t5",
+      "results": [],
+      "location": "Soyo, Zaire, Angola",
+      "period": {
+        "startYear": 2020,
+        "endYear": null,
+        "label": "2020"
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 787000000
+      },
+      "projectOutcome": "",
+      "migrationMeta": {
+        "inferredAt": "2026-02-23T07:37:54.288Z",
+        "sourceVersion": "projects-export-v1",
+        "metricsAreProvisional": true
+      },
+      "metrics": [],
+      "title": "Architectural Project - Single-Family Home T5",
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": "The single-family home was designed with two floors in the main building, featuring the following layout:",
+      "slug": "architectural-project-single-family-home-t5",
+      "responsibilities": [
+        "An open common room",
+        "A kitchen",
+        "A bathroom serving the outdoor area",
+        "A laundry room",
+        "A storage room",
+        "A gym",
+        "One bedroom",
+        "A large open room",
+        "An office",
+        "A library",
+        "A general bathroom"
+      ],
+      "client": null,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 787000000
+      },
+      "isVisible": true,
+      "organization": "AUTONOMOUS PROJECT",
+      "media": {
+        "mainImage": "1.jpg",
+        "video": null,
+        "images": [
+          "1.jpg",
+          "2.jpg",
+          "3.jpg",
+          "4.jpg",
+          "5.jpg",
+          "6.jpg",
+          "7.jpg",
+          "8.jpg",
+          "9.jpg"
+        ],
+        "thumbnails": []
+      }
+    },
+    {
+      "id": "construction-of-120-social-apartments-in-buco-zau",
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779831303,
+        "nanoseconds": 604000000
+      },
+      "projectOutcome": {
+        "en": "A high-impact housing delivery project demonstrating measurable progress improvement, leadership scalability, and strong quality/coordination performance.",
+        "pt": "A high-impact housing delivery project demonstrating measurable progress improvement, leadership scalability, and strong quality/coordination performance."
+      },
+      "migrationMeta": {
+        "inferredAt": "2026-02-23T07:37:54.288Z",
+        "sourceVersion": "projects-export-v1",
+        "metricsAreProvisional": true
+      },
+      "coordinates": {
+        "lng": 12.5419,
+        "lat": -4.7617
+      },
+      "metrics": [
+        {
+          "confidence": "high",
+          "key": "physical_progress",
+          "value": "46% -> 62.17%",
+          "label": "Physical Progress",
+          "source": "inferred"
+        },
+        {
+          "confidence": "high",
+          "key": "financial_progress",
+          "value": "52.8% -> 62.3%",
+          "source": "inferred",
+          "label": "Financial Progress"
+        },
+        {
+          "source": "inferred",
+          "label": "Peak Workforce",
+          "value": "300 workers",
+          "confidence": "high",
+          "key": "peak_workforce"
+        },
+        {
+          "confidence": "medium",
+          "key": "subcontractors",
+          "label": "Subcontractors",
+          "source": "inferred",
+          "value": "5+ on site"
+        }
+      ],
+      "title": {
+        "pt": "Construction of 120 Social Apartments in Buco-Zau",
+        "en": "Construction of 120 Social Apartments in Buco-Zau"
+      },
+      "results": [
+        "Took over project at 46% physical progress and 52.8% financial progress.",
+        "In six months, increased progress to 62.17% physical and 62.3% financial.",
+        "Served one year as full-time Project Quality Technician, then promoted to Deputy Project Manager and later appointed Project Director."
+      ],
+      "location": {
+        "en": "Buco-Zau, Cabinda, Angola",
+        "pt": "Buco-Zau, Cabinda, Angola"
+      },
+      "modelAsset": null,
+      "period": {
+        "startYear": 2024,
+        "label": "2024-Present",
+        "endYear": null
+      },
+      "media": {
+        "model": null,
+        "mainImage": "120-Apart-BZ-01.jpg",
+        "images": [
+          "120-Apart-BZ-01.jpg",
+          "120-Apart-BZ-02.jpg",
+          "120-Apart-BZ-03.jpg",
+          "120-Apart-BZ-04.jpg",
+          "120-Apart-BZ-05.JPG",
+          "120-Apart-BZ-06.JPG",
+          "120-Apart-BZ-07.jpg",
+          "120-Apart-BZ-08.jpg",
+          "120-Apart-BZ-09.jpg"
+        ],
+        "thumbnails": [],
+        "video": null
+      },
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": {
+        "pt": "Deputy Project Management and construction leadership in a large-scale social housing project.",
+        "en": "Deputy Project Management and construction leadership in a large-scale social housing project."
+      },
+      "slug": "construction-of-120-social-apartments-in-buco-zau",
+      "imageRefs": [
+        "120-Apart-BZ-01.jpg",
+        "120-Apart-BZ-02.jpg",
+        "120-Apart-BZ-03.jpg",
+        "120-Apart-BZ-04.jpg",
+        "120-Apart-BZ-05.JPG",
+        "120-Apart-BZ-06.JPG",
+        "120-Apart-BZ-07.jpg",
+        "120-Apart-BZ-08.jpg",
+        "120-Apart-BZ-09.jpg"
+      ],
+      "responsibilities": [
+        "Managed approximately 300 workers at peak workforce.",
+        "Coordinated operations with more than five subcontractors."
+      ],
+      "client": null,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 117000000
+      },
+      "isVisible": true,
+      "organization": {
+        "en": "MOTA-ENGIL ANGOLA",
+        "pt": "MOTA-ENGIL ANGOLA"
+      }
+    },
+    {
+      "id": "construction-of-access-roads-to-the-new-bridge-over-the-lucola-river",
+      "coordinates": {
+        "lng": 12.2111,
+        "lat": -5.5541
+      },
+      "metrics": [
+        {
+          "value": "50%",
+          "source": "inferred",
+          "label": "Current Progress",
+          "confidence": "low",
+          "key": "current_progress"
+        }
+      ],
+      "title": {
+        "en": "Construction of Access Roads to the New Bridge Over the Lucola River",
+        "pt": "Construction of Access Roads to the New Bridge Over the Lucola River"
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779831106,
+        "nanoseconds": 100000000
+      },
+      "projectOutcome": {
+        "pt": "This endeavor provided me with the opportunity to strengthen collaborative ties with the Internal Support Services (SAI), which include the laboratory, topography, transportation, metalworking, concrete plant, prefabrication, iron cutting and shaping, electromechanics, and cafeteria. This contributed to the project's success and efficiency, strengthening the bonds among the various teams involved.",
+        "en": "This endeavor provided me with the opportunity to strengthen collaborative ties with the Internal Support Services (SAI), which include the laboratory, topography, transportation, metalworking, concrete plant, prefabrication, iron cutting and shaping, electromechanics, and cafeteria. This contributed to the project's success and efficiency, strengthening the bonds among the various teams involved."
+      },
+      "migrationMeta": {
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.289Z",
+        "metricsAreProvisional": true
+      },
+      "modelAsset": null,
+      "period": {
+        "startYear": 2023,
+        "label": "2023",
+        "endYear": null
+      },
+      "results": [],
+      "location": {
+        "en": "Cabinda, Angola",
+        "pt": "Cabinda, Angola"
+      },
+      "media": {
+        "model": null,
+        "mainImage": "ac1.jpg",
+        "images": [
+          "ac1.jpg",
+          "ac2.jpg",
+          "ac3.jpg",
+          "ac4.jpg",
+          "ac5.jpg",
+          "ac6.jpg",
+          "ac7.jpg",
+          "ac8.jpg",
+          "ac9.jpg",
+          "l1.jpg",
+          "l2.jpg",
+          "l3.jpg"
+        ],
+        "thumbnails": [],
+        "video": null
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 614000000
+      },
+      "isVisible": true,
+      "organization": {
+        "en": "MOTA-ENGIL ANGOLA",
+        "pt": "MOTA-ENGIL ANGOLA"
+      },
+      "categoryId": "cls84qSd540WTlteo4Ip",
+      "context": {
+        "en": "I was integrated into the project, which consists of creating an alternative route connecting to Cabassango, crossing the Lucola River, after approximately 50% of the project's physical execution. In this endeavor, I gained knowledge in:",
+        "pt": "I was integrated into the project, which consists of creating an alternative route connecting to Cabassango, crossing the Lucola River, after approximately 50% of the project's physical execution. In this endeavor, I gained knowledge in:"
+      },
+      "slug": "construction-of-access-roads-to-the-new-bridge-over-the-lucola-river",
+      "imageRefs": [
+        "ac1.jpg",
+        "ac2.jpg",
+        "ac3.jpg",
+        "ac4.jpg",
+        "ac5.jpg",
+        "ac6.jpg",
+        "ac7.jpg",
+        "ac8.jpg",
+        "ac9.jpg",
+        "l1.jpg",
+        "l2.jpg",
+        "l3.jpg"
+      ],
+      "responsibilities": [
+        "Application of various sanitation methods;",
+        "Preparation of the box bottom and subsequent layers;",
+        "Execution of the base layer with soil-cement (extending more than 1 kilometer and 580 meters);",
+        "Construction of drains and crossings with culverts;",
+        "Construction of ditches and gutters;",
+        "Construction of concrete sidewalks;",
+        "Installation of curbs and counter-curbs;",
+        "Staking out the road section;",
+        "Understanding the functionality of the main equipment for road construction;",
+        "Effective traffic management, including traffic diversions;",
+        "Resolving conflicts with the local population."
+      ],
+      "client": null
+    },
+    {
+      "id": "construction-of-the-new-bridge-over-the-lucola-river",
+      "media": {
+        "images": [
+          "rl1.jpg",
+          "rl2.jpg",
+          "rl3.jpg",
+          "rl4.jpg",
+          "rl5.jpg",
+          "rl6.jpg",
+          "rl7.jpg",
+          "rl8.jpg",
+          "rl9.jpg",
+          "rl10.JPG",
+          "rl11.JPG",
+          "rl12.JPG"
+        ],
+        "mainImage": "rl1.jpg",
+        "model": null,
+        "thumbnails": [],
+        "video": null
+      },
+      "isVisible": true,
+      "organization": {
+        "en": "MOTA-ENGIL ANGOLA",
+        "pt": "MOTA-ENGIL ANGOLA"
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 767000000
+      },
+      "responsibilities": [
+        "Monitored and coordinated the installation of 47 prefabricated pre-slabs, each averaging 14.5 tons, including in-situ casting at both end slabs.",
+        "Executed joint casting operations to ensure deck continuity and structural integrity.",
+        "Applied bituminous waterproofing membrane over the binder layer.",
+        "Applied the bituminous concrete wearing course for final pavement performance.",
+        "Prepared and implemented slope geometry to improve surrounding terrain stability.",
+        "Delivered slope protection using a mixed containment solution: hydraulic concrete and topsoil with Wedelia planting for erosion control and drainage support."
+      ],
+      "client": null,
+      "categoryId": "XNkBW3lJXxIKk4iEuL8o",
+      "context": {
+        "en": "Built with a mixed structural solution combining prefabricated slabs (pre-slabs) on steel profiles. I joined the New Bridge project at approximately 70% physical progress and contributed directly to core execution and finishing activities.",
+        "pt": "Built with a mixed structural solution combining prefabricated slabs (pre-slabs) on steel profiles. I joined the New Bridge project at approximately 70% physical progress and contributed directly to core execution and finishing activities."
+      },
+      "slug": "construction-of-the-new-bridge-over-the-lucola-river",
+      "imageRefs": [
+        "rl1.jpg",
+        "rl2.jpg",
+        "rl3.jpg",
+        "rl4.jpg",
+        "rl5.jpg",
+        "rl6.jpg",
+        "rl7.jpg",
+        "rl8.jpg",
+        "rl9.jpg",
+        "rl10.JPG",
+        "rl11.JPG",
+        "rl12.JPG"
+      ],
+      "title": {
+        "en": "Construction of the New Bridge Over the Lucola River",
+        "pt": "Construction of the New Bridge Over the Lucola River"
+      },
+      "coordinates": {
+        "lng": 12.2111,
+        "lat": -5.5541
+      },
+      "metrics": [
+        {
+          "value": "70%",
+          "source": "inferred",
+          "label": "Physical Progress",
+          "confidence": "medium",
+          "key": "physical_progress"
+        },
+        {
+          "value": "14.5 tons",
+          "label": "Average Load",
+          "source": "inferred",
+          "confidence": "medium",
+          "key": "average_load"
+        }
+      ],
+      "projectOutcome": {
+        "pt": "This phase strengthened my execution control in bridge works, combining structural coordination, pavement layers, and slope stabilization with quality and safety focus in a live construction environment.",
+        "en": "This phase strengthened my execution control in bridge works, combining structural coordination, pavement layers, and slope stabilization with quality and safety focus in a live construction environment."
+      },
+      "migrationMeta": {
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.289Z",
+        "metricsAreProvisional": true
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779831544,
+        "nanoseconds": 315000000
+      },
+      "period": {
+        "startYear": 2023,
+        "endYear": null,
+        "label": "2023"
+      },
+      "modelAsset": null,
+      "location": {
+        "en": "Cabinda, Angola",
+        "pt": "Cabinda, Angola"
+      },
+      "results": []
+    },
+    {
+      "id": "evolutionary-architectural-project-for-a-residential-complex-with-10-apartments",
+      "results": [],
+      "location": "Huambo, Angola",
+      "period": {
+        "endYear": null,
+        "label": "2020",
+        "startYear": 2020
+      },
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 924000000
+      },
+      "skillsShowcased": [],
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "inferredAt": "2026-02-23T07:37:54.289Z",
+        "sourceVersion": "projects-export-v1"
+      },
+      "projectOutcome": "",
+      "metrics": [],
+      "title": "Evolutionary Architectural Project for a Residential Complex with 10 Apartments",
+      "slug": "evolutionary-architectural-project-for-a-residential-complex-with-10-apartments",
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": "The project was developed with the ambition of future expansion to approximately 15 apartments, each comprising:",
+      "responsibilities": [
+        "Living room",
+        "Kitchen",
+        "Bedroom",
+        "Bathroom",
+        "General reception area",
+        "Community kitchen",
+        "Parking area",
+        "Two auxiliary staircases for access to the upper floor",
+        "Shop"
+      ],
+      "client": null,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 924000000
+      },
+      "isVisible": true,
+      "organization": "AUTONOMOUS PROJECT",
+      "media": {
+        "thumbnails": [],
+        "mainImage": "im1.jpeg",
+        "video": null,
+        "images": [
+          "im1.jpeg",
+          "im2.jpeg",
+          "im3.jpeg"
+        ]
+      }
+    },
+    {
+      "id": "executive-and-structural-project-of-a-t4-single-family-home",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 622000000
+      },
+      "skillsShowcased": [],
+      "migrationMeta": {
+        "inferredAt": "2026-02-23T07:37:54.289Z",
+        "sourceVersion": "projects-export-v1",
+        "metricsAreProvisional": true
+      },
+      "projectOutcome": "",
+      "metrics": [],
+      "title": "Executive and Structural Project of a T4 Single-Family Home",
+      "results": [],
+      "location": "Luanda, Angola",
+      "period": {
+        "startYear": 2021,
+        "label": "2021-2023",
+        "endYear": 2023
+      },
+      "media": {
+        "mainImage": "p10.jpg",
+        "images": [
+          "p10.jpg",
+          "p8.jpeg",
+          "p6.jpeg",
+          "p5.jpeg",
+          "p7.jpeg",
+          "p3.jpeg",
+          "p4.jpeg",
+          "p2.jpeg",
+          "p1.jpeg"
+        ],
+        "video": null,
+        "thumbnails": []
+      },
+      "slug": "executive-and-structural-project-of-a-t4-single-family-home",
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": "The building has the following layout:",
+      "responsibilities": [
+        "Living room",
+        "Dining room",
+        "Kitchen with pantry",
+        "Half bath",
+        "Bedroom with en-suite bathroom",
+        "Laundry room",
+        "Office + library",
+        "Living room",
+        "Half bath",
+        "Suite with ante-room",
+        "Two bedrooms with en-suite bathrooms",
+        "Open social area (with barbecue space)",
+        "External bathroom",
+        "Pool (7×3 m)",
+        "Living room",
+        "Kitchen",
+        "General bathroom",
+        "Two bedrooms"
+      ],
+      "client": null,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 622000000
+      },
+      "organization": "AUTONOMOUS PROJECT",
+      "isVisible": true
+    },
+    {
+      "id": "mamaland-project-electronic-model-of-tchiela-farm",
+      "title": {
+        "en": "Mamaland Project: Electronic Model of Tchiela Farm",
+        "pt": "Mamaland Project: Electronic Model of Tchiela Farm"
+      },
+      "coordinates": {
+        "lng": 12.3597,
+        "lat": -5.1894
+      },
+      "metrics": [],
+      "projectOutcome": {
+        "en": "In addition to these blocks, the model includes the expansion of offices, kitchen, sanitary facilities, and other necessary spaces for the proper functioning of the farm.",
+        "pt": "In addition to these blocks, the model includes the expansion of offices, kitchen, sanitary facilities, and other necessary spaces for the proper functioning of the farm."
+      },
+      "migrationMeta": {
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.289Z",
+        "metricsAreProvisional": true
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779845384,
+        "nanoseconds": 235000000
+      },
+      "period": {
+        "startYear": 2023,
+        "endYear": null,
+        "label": "2023"
+      },
+      "modelAsset": null,
+      "location": {
+        "pt": "Cabinda, Angola",
+        "en": "Cabinda, Angola"
+      },
+      "results": [],
+      "media": {
+        "video": null,
+        "thumbnails": [],
+        "images": [
+          "Mamaland-Tchiela+1.jpg",
+          "Mamaland-Tchiela+2.jpg",
+          "Mamaland-Tchiela+3.jpg",
+          "Mamaland-Tchiela+4.jpg",
+          "Mamaland-Tchiela+5.jpg",
+          "Mamaland-Tchiela+6.jpg"
+        ],
+        "mainImage": "Mamaland-Tchiela+1.jpg",
+        "model": null
+      },
+      "isVisible": true,
+      "organization": {
+        "pt": "MAMALAND ~ MOTA-ENGIL ANGOLA",
+        "en": "MAMALAND ~ MOTA-ENGIL ANGOLA"
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 471000000
+      },
+      "responsibilities": [
+        "Cutting Area",
+        "Fermentation Area",
+        "Drying Area",
+        "Bagging Area",
+        "Composting Area"
+      ],
+      "client": null,
+      "context": {
+        "en": "The electronic model was developed to optimize the layout of facilities for processing harvested cocoa. The project includes the distribution of five main blocks:",
+        "pt": "The electronic model was developed to optimize the layout of facilities for processing harvested cocoa. The project includes the distribution of five main blocks:"
+      },
+      "categoryId": "Lqey3xI9BOdp7MQFJ45Q",
+      "slug": "mamaland-project-electronic-model-of-tchiela-farm",
+      "imageRefs": [
+        "Mamaland-Tchiela+1.jpg",
+        "Mamaland-Tchiela+2.jpg",
+        "Mamaland-Tchiela+3.jpg",
+        "Mamaland-Tchiela+4.jpg",
+        "Mamaland-Tchiela+5.jpg",
+        "Mamaland-Tchiela+6.jpg"
+      ]
+    },
+    {
+      "id": "modification-and-renovation-project-for-two-t1-residences",
+      "metrics": [],
+      "title": "Modification and Renovation Project for Two T1 Residences",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119132,
+        "nanoseconds": 24000000
+      },
+      "skillsShowcased": [],
+      "migrationMeta": {
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.289Z",
+        "metricsAreProvisional": true
+      },
+      "projectOutcome": "",
+      "period": {
+        "label": "2021",
+        "endYear": null,
+        "startYear": 2021
+      },
+      "results": [],
+      "location": "Luanda, Angola",
+      "media": {
+        "thumbnails": [],
+        "images": [],
+        "video": null,
+        "mainImage": null
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119132,
+        "nanoseconds": 24000000
+      },
+      "isVisible": true,
+      "organization": "AUTONOMOUS PROJECT",
+      "slug": "modification-and-renovation-project-for-two-t1-residences",
+      "context": "Each residence comprises a hall, common room, kitchen, bathroom, and bedroom. The activities carried out included:",
+      "categoryId": "",
+      "responsibilities": [
+        "Creating openings for the installation of a counter",
+        "Applying porcelain tile flooring and wall coverings",
+        "Leveling the floors",
+        "Renewing the general interior paint",
+        "Intervening in the sanitation system (sewage), including cleaning the septic tank",
+        "Repairing the roof to address infiltration issues caused by weather conditions"
+      ],
+      "client": null
+    },
+    {
+      "id": "ravines-in-cabinda-province-tchizo-1",
+      "period": {
+        "endYear": null,
+        "label": "2023",
+        "startYear": 2023
+      },
+      "modelAsset": null,
+      "location": {
+        "pt": "Tchizo Neighborhood, Outskirts of Cabinda City, Angola",
+        "en": "Tchizo Neighborhood, Outskirts of Cabinda City, Angola"
+      },
+      "results": [
+        "Development of a Monthly Plan using specialized tools to track progress and ensure timely execution."
+      ],
+      "title": {
+        "en": "Ravines in Cabinda Province-Tchizo 1",
+        "pt": "Ravines in Cabinda Province-Tchizo 1"
+      },
+      "coordinates": {
+        "lng": 12.2014,
+        "lat": -5.54
+      },
+      "metrics": [],
+      "projectOutcome": {
+        "en": "",
+        "pt": ""
+      },
+      "migrationMeta": {
+        "inferredAt": "2026-02-23T07:37:54.290Z",
+        "sourceVersion": "projects-export-v1",
+        "metricsAreProvisional": true
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779831784,
+        "nanoseconds": 213000000
+      },
+      "isVisible": true,
+      "organization": {
+        "en": "MOTA-ENGIL ANGOLA",
+        "pt": "MOTA-ENGIL ANGOLA"
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 301000000
+      },
+      "responsibilities": [
+        "Coordination with Internal Support Services (ISS)* for the procurement of services and materials.",
+        "Utilization of SAP for various project management tasks, including: requesting materials, approving materials and services, logistic control and approval of working hours.",
+        "Additional Responsibilities as required to ensure the smooth operation and completion of the project."
+      ],
+      "client": null,
+      "categoryId": "Cp9xSIXIMaNw8rDyFt5e",
+      "context": {
+        "en": "The project aims to execute a technical landfill using selected soils to facilitate the construction of a drop inspection chamber, collectors, and slope descents. This will enable the redirection of water from collectors and ditches towards a water line, where energy dissipation boxes will be constructed to prevent ongoing soil erosion.",
+        "pt": "The project aims to execute a technical landfill using selected soils to facilitate the construction of a drop inspection chamber, collectors, and slope descents. This will enable the redirection of water from collectors and ditches towards a water line, where energy dissipation boxes will be constructed to prevent ongoing soil erosion."
+      },
+      "imageRefs": [
+        "R.Tchizo 1.jpg",
+        "R.Tchizo 2.JPG",
+        "R.Tchizo 3.JPG",
+        "R.Tchizo 4.JPG",
+        "R.Tchizo 5.JPG",
+        "R.Tchizo 6.JPG",
+        "R.Tchizo 7.JPG",
+        "R.Tchizo 8.JPG",
+        "R.Tchizo 9.JPG"
+      ],
+      "slug": "ravines-in-cabinda-province-tchizo-1",
+      "media": {
+        "images": [
+          "R.Tchizo 1.jpg",
+          "R.Tchizo 2.JPG",
+          "R.Tchizo 3.JPG",
+          "R.Tchizo 4.JPG",
+          "R.Tchizo 5.JPG",
+          "R.Tchizo 6.JPG",
+          "R.Tchizo 7.JPG",
+          "R.Tchizo 8.JPG",
+          "R.Tchizo 9.JPG"
+        ],
+        "mainImage": "R.Tchizo 1.jpg",
+        "model": null,
+        "thumbnails": [],
+        "video": null
+      }
+    },
+    {
+      "id": "rehabilitation-of-the-maria-mambo-cafe-airport-pavement-runway",
+      "modelAsset": null,
+      "period": {
+        "endYear": null,
+        "label": "2023",
+        "startYear": 2023
+      },
+      "results": [],
+      "location": {
+        "pt": "Cabinda, Angola",
+        "en": "Cabinda, Angola"
+      },
+      "metrics": [],
+      "coordinates": {
+        "lng": 12.1883,
+        "lat": -5.5972
+      },
+      "title": {
+        "pt": "Rehabilitation of the Maria Mambo Café Airport Pavement Runway",
+        "en": "Rehabilitation of the Maria Mambo Café Airport Pavement Runway"
+      },
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779831924,
+        "nanoseconds": 531000000
+      },
+      "skillsShowcased": [],
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "inferredAt": "2026-02-23T07:37:54.292Z",
+        "sourceVersion": "projects-export-v1"
+      },
+      "projectOutcome": {
+        "pt": "",
+        "en": ""
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 434000000
+      },
+      "organization": {
+        "en": "MOTA-ENGIL ANGOLA",
+        "pt": "MOTA-ENGIL ANGOLA"
+      },
+      "isVisible": true,
+      "slug": "rehabilitation-of-the-maria-mambo-cafe-airport-pavement-runway",
+      "imageRefs": [
+        "A3.jpg",
+        "A2.jpg",
+        "A5.jpg",
+        "A8.jpg",
+        "A0.jpg",
+        "A7.jpg"
+      ],
+      "categoryId": "7W4yQOeBixpyFcZjW0yE",
+      "context": {
+        "en": "The project involved intervention on the runway of the main aerodrome in the province of Cabinda. Aimed at preserving the local economy and meeting the population's needs regarding flight services, the activities were carried out during the nighttime, after the closure of the last service, from midnight to 6 AM. The focus was primarily on the following activities:",
+        "pt": "The project involved intervention on the runway of the main aerodrome in the province of Cabinda. Aimed at preserving the local economy and meeting the population's needs regarding flight services, the activities were carried out during the nighttime, after the closure of the last service, from midnight to 6 AM. The focus was primarily on the following activities:"
+      },
+      "client": null,
+      "responsibilities": [
+        "Milling to a depth of 5 cm, covering a total length of 600 meters and width of 16 meters;",
+        "Repositioning the milled layer with asphalt."
+      ],
+      "media": {
+        "images": [
+          "A3.jpg",
+          "A2.jpg",
+          "A5.jpg",
+          "A8.jpg",
+          "A0.jpg",
+          "A7.jpg"
+        ],
+        "model": null,
+        "mainImage": "A3.jpg",
+        "video": null,
+        "thumbnails": []
+      }
+    },
+    {
+      "id": "rehabilitation-of-the-office-building-on-macau-street",
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": "I served as Deputy Director in this significant Civil Construction project focusing on Buildings. The undertaking involved rehabilitating the main building with four floors and demolishing a two-story support building (annex) for total reconstruction. I gained essential knowledge, including:",
+      "slug": "rehabilitation-of-the-office-building-on-macau-street",
+      "client": null,
+      "responsibilities": [
+        "Setting up the construction site and preparing for the groundbreaking ceremony, actively participating in all stages of this process;",
+        "Techniques applied in the building rehabilitation process;",
+        "Effective use of the SAP tool, focusing on procurement, logistics, and warehousing;",
+        "Efficient interaction with suppliers, optimizing procurement and logistics processes;",
+        "Safe and efficient execution of demolitions;",
+        "Understanding the functioning of internal debits, optimizing cash flow;",
+        "Filling out the internal file for the monthly plan."
+      ],
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 871000000
+      },
+      "organization": "MOTA-ENGIL ANGOLA",
+      "isVisible": true,
+      "media": {
+        "thumbnails": [],
+        "video": null,
+        "images": [
+          "macau5.jpg",
+          "macau8.jpg",
+          "macau2.jpg",
+          "macau7.jpg",
+          "macau4.jpg",
+          "macau9.jpg",
+          "macau3.jpg",
+          "macau1.jpg",
+          "macau6.jpg"
+        ],
+        "mainImage": "macau5.jpg"
+      },
+      "results": [],
+      "location": "Cabinda, Angola",
+      "period": {
+        "label": "2023",
+        "endYear": null,
+        "startYear": 2023
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 871000000
+      },
+      "projectOutcome": "The project provided me with a valuable opportunity to establish solid and collaborative contacts with the Internal Support Services, including transportation, metalworking, concrete plant, iron cutting and shaping, electromechanics, and cafeteria.",
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "inferredAt": "2026-02-23T07:37:54.292Z",
+        "sourceVersion": "projects-export-v1"
+      },
+      "metrics": [],
+      "title": "Rehabilitation of the office building on Macau Street"
+    },
+    {
+      "id": "renovation-and-expansion-of-a-2-story-residence",
+      "media": {
+        "thumbnails": [],
+        "images": [
+          "cd1.jpg",
+          "cd2.jpg",
+          "cd3.jpg",
+          "cd7.jpg",
+          "cd5.jpg",
+          "cd6.jpg",
+          "cd4.jpg",
+          "cd8.jpg",
+          "cd9.jpg",
+          "cd10.jpg",
+          "cd11.jpg",
+          "cd12.jpg",
+          "cd13.jpg",
+          "cd14.jpg",
+          "cd15.jpg"
+        ],
+        "video": null,
+        "mainImage": "cd1.jpg"
+      },
+      "slug": "renovation-and-expansion-of-a-2-story-residence",
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": "Throughout the project, I was involved in production, planning, procurement (acquisition of materials and tools/equipment), design (architecture), measurements and budgeting, logistics-warehouse, and as a driver. The project consisted of renovating and expanding the residence, resulting in the addition of:",
+      "responsibilities": [
+        "Gym",
+        "bedrooms",
+        "bathrooms;",
+        "New construction of a party hall (including kitchen and pool)."
+      ],
+      "client": null,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 181000000
+      },
+      "isVisible": true,
+      "organization": "CADEL CONSTRUÇÕES",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 181000000
+      },
+      "skillsShowcased": [],
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.292Z"
+      },
+      "projectOutcome": "",
+      "metrics": [],
+      "title": "Renovation and Expansion of a 2-Story Residence",
+      "results": [],
+      "location": "Luanda",
+      "period": {
+        "startYear": 2020,
+        "label": "2020-2021",
+        "endYear": 2021
+      }
+    },
+    {
+      "id": "renovation-and-expansion-of-the-1º-de-maio-maternity-hospital",
+      "period": {
+        "startYear": 2022,
+        "endYear": null,
+        "label": "2022"
+      },
+      "location": "Cabinda, Angola",
+      "results": [],
+      "title": "Renovation and Expansion of the 1º de Maio Maternity Hospital",
+      "metrics": [],
+      "projectOutcome": "",
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "inferredAt": "2026-02-23T07:37:54.292Z",
+        "sourceVersion": "projects-export-v1"
+      },
+      "skillsShowcased": [],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 982000000
+      },
+      "isVisible": true,
+      "organization": "MOTA-ENGIL ANGOLA",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119130,
+        "nanoseconds": 982000000
+      },
+      "responsibilities": [],
+      "client": null,
+      "categoryId": "WmwMiRynUoX6zeHg5luH",
+      "context": "The main goal of this project was to contribute to the reduction of maternal and infant morbidity and mortality, ensuring childbirth assistance that provides comfort to both the mother and the newborn, as well as postpartum care.",
+      "slug": "renovation-and-expansion-of-the-1º-de-maio-maternity-hospital",
+      "media": {
+        "thumbnails": [],
+        "mainImage": "mt1.jpg",
+        "images": [
+          "mt1.jpg",
+          "mt2.jpg",
+          "mt3.jpg",
+          "mt4.jpg",
+          "mt5.jpg",
+          "mt6.jpg",
+          "mt7.jpg",
+          "mt8.jpg",
+          "mt9.jpg"
+        ],
+        "video": null
+      }
+    },
+    {
+      "id": "stormwater-drainage-system-rehabilitation-in-cabinda-city",
+      "modelAsset": null,
+      "period": {
+        "label": "2024",
+        "endYear": null,
+        "startYear": 2024
+      },
+      "results": [],
+      "location": {
+        "pt": "Cabinda, Angola",
+        "en": "Cabinda, Angola"
+      },
+      "metrics": [],
+      "coordinates": {
+        "lng": 12.1986,
+        "lat": -5.5503
+      },
+      "title": {
+        "en": "Stormwater Drainage System Rehabilitation in Cabinda City",
+        "pt": "Stormwater Drainage System Rehabilitation in Cabinda City"
+      },
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779845527,
+        "nanoseconds": 935000000
+      },
+      "skillsShowcased": [],
+      "migrationMeta": {
+        "metricsAreProvisional": true,
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.292Z"
+      },
+      "projectOutcome": {
+        "pt": "This model serves as a visual tool to better understand the proposed interventions, ensuring a more efficient and sustainable urban infrastructure.",
+        "en": "This model serves as a visual tool to better understand the proposed interventions, ensuring a more efficient and sustainable urban infrastructure."
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 321000000
+      },
+      "organization": {
+        "pt": "MOTA-ENGIL ANGOLA",
+        "en": "MOTA-ENGIL ANGOLA"
+      },
+      "isVisible": true,
+      "slug": "stormwater-drainage-system-rehabilitation-in-cabinda-city",
+      "imageRefs": [
+        "GPC1.jpg",
+        "GPC2.jpg",
+        "GPC3.jpg",
+        "GPC4.jpg",
+        "GPC5.jpg",
+        "GPC6.jpg"
+      ],
+      "context": {
+        "pt": "The electronic model was developed to present the conceptual project aimed at improving the city of Cabinda, due to the increasing degradation of urban infrastructure. The project includes:",
+        "en": "The electronic model was developed to present the conceptual project aimed at improving the city of Cabinda, due to the increasing degradation of urban infrastructure. The project includes:"
+      },
+      "categoryId": "cls84qSd540WTlteo4Ip",
+      "responsibilities": [
+        "Sidewalks",
+        "Curbs",
+        "Ditches and catch basins",
+        "Manholes",
+        "Trees",
+        "Urban furniture"
+      ],
+      "client": null,
+      "media": {
+        "video": null,
+        "thumbnails": [],
+        "model": null,
+        "mainImage": "GPC1.jpg",
+        "images": [
+          "GPC1.jpg",
+          "GPC2.jpg",
+          "GPC3.jpg",
+          "GPC4.jpg",
+          "GPC5.jpg",
+          "GPC6.jpg"
+        ]
+      }
+    },
+    {
+      "id": "trainee-program-startme-2021-8th-edition",
+      "media": {
+        "mainImage": "st13.jpg",
+        "video": null,
+        "images": [
+          "st13.jpg",
+          "st14.jpg",
+          "st5.jpg",
+          "st1.jpg",
+          "st3.jpg",
+          "st4.jpg",
+          "st6.jpg",
+          "st7.jpg",
+          "st9.jpg",
+          "st16.jpg",
+          "st12.jpg",
+          "st10.jpg",
+          "st11.jpg",
+          "st8.jpg",
+          "st15.jpg"
+        ],
+        "thumbnails": []
+      },
+      "client": null,
+      "responsibilities": [
+        "Measurements area;",
+        "Laboratory - besides laboratory tests, I also interacted with the Breakwater and Port of Cabinda project (conducting Slump tests in situ) and intervention on Rua 57 in Cabaçango (conducting Proctor tests in situ);",
+        "General Hospital of Cabinda, where I gained experience mainly in the QHSE (Quality, Health, Safety, and Environment) area;",
+        "Rehabilitation and expansion of the Maternity Hospital of Cabinda, where I served as Deputy Director. I also provided support in quality, measurements, and civil-architecture preparation areas."
+      ],
+      "slug": "trainee-program-startme-2021-8th-edition",
+      "categoryId": "trainee",
+      "context": "During the internship period, as a trainee, I had the opportunity to gain knowledge in different sectors and cost centers, namely:",
+      "organization": "MOTA-ENGIL ANGOLA",
+      "isVisible": true,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 69000000
+      },
+      "migrationMeta": {
+        "sourceVersion": "projects-export-v1",
+        "inferredAt": "2026-02-23T07:37:54.292Z",
+        "metricsAreProvisional": true
+      },
+      "projectOutcome": "",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1748119131,
+        "nanoseconds": 69000000
+      },
+      "skillsShowcased": [],
+      "title": "Trainee Program STARTME @2021_8th Edition",
+      "metrics": [],
+      "location": "Angola",
+      "results": [],
+      "period": {
+        "label": "2022",
+        "endYear": null,
+        "startYear": 2022
+      }
+    }
+  ]
+}

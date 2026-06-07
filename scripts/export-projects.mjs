@@ -37,7 +37,16 @@ const projects = snapshot.docs.map((doc) => ({
   ...doc.data(),
 }));
 
-projects.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+const sortLabel = (value) => {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  if (typeof value === "object") {
+    return value.en || value.pt || Object.values(value).find((item) => typeof item === "string") || "";
+  }
+  return String(value);
+};
+
+projects.sort((a, b) => sortLabel(a.title).localeCompare(sortLabel(b.title)));
 
 const payload = {
   exportedAt: new Date().toISOString(),
