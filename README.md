@@ -4,6 +4,13 @@ A high-performance single-page application architected to showcase complex civil
 
 The platform is more than a portfolio site: it is a technical case study in building a resilient project showcase for infrastructure work, including social housing, bridges, drainage systems, airport pavement rehabilitation, and multimedia engineering documentation.
 
+## Design Documentation
+
+- [`docs/high-level-system-design.md`](docs/high-level-system-design.md): high-level system design covering the current React, Firestore, S3, CloudFront, admin upload, caching, and media delivery architecture, plus recommended rollout and technical decisions.
+- [`docs/performance-baseline.md`](docs/performance-baseline.md): performance measurement plan, budgets, route checklist, and before/after evidence template for the CDN and gallery-loading case study.
+- [`docs/media-architecture.md`](docs/media-architecture.md): media storage, URL, caching, upload, rendering, and migration rules for project images and future assets.
+- [`docs/operations-runbook.md`](docs/operations-runbook.md): operational checks and incident procedures for deployments, image delivery, admin uploads, CDN behavior, and Firestore usage.
+
 ## Core Technical Achievements
 
 ## Current Implementation Status
