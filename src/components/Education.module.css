@@ -2,34 +2,38 @@
 
 .education {
   align-items: center;
-  background-color: var(--color-border);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-container);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(141, 158, 162, 0.24));
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  padding: var(--padding-container);
+  padding: var(--padding-card);
   transition: var(--transition);
 }
 
 .education:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--box-shadow);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .panel {
-  background-color: var(--color-panel);
-  border-radius: 10px;
-  box-shadow: var(--box-shadow-container);
+  background:
+    linear-gradient(180deg, #ffffff 0%, var(--color-panel-soft) 100%);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   margin-bottom: 20px;
-  padding: 10px;
+  padding: var(--padding-card);
   transition: var(--transition);
   width: 100%;
 }
 
 .panel:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .row {
@@ -53,13 +57,14 @@
 .image {
   display: block;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.12);
 }
 
 .image img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 12px;
   transition: transform 0.3s ease;
 }
 
@@ -97,7 +102,8 @@
 
 .title {
   color: var(--color-primary);
-  font-size: 1.5em;
+  font-size: 1.45em;
+  line-height: 1.15;
   margin-bottom: 10px;
 }
 
@@ -120,8 +126,23 @@
 }
 
 @media (max-width: 768px) {
+  .education,
+  .panel {
+    border-radius: var(--border-radius-mobile);
+    padding: var(--padding-card-mobile);
+    transform: none;
+  }
+
+  .education:hover,
+  .panel:hover,
+  .col-4:hover,
+  .image img:hover {
+    transform: none;
+  }
+
   .traineeSummary {
-    font-size: 0.68em;
+    font-size: 0.88rem;
+    line-height: 1.35;
   }
 
   .title {

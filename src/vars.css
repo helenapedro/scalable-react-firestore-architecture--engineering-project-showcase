@@ -4,7 +4,11 @@
   --color-alternative-primary: #007bff;
   --color-secondary: #c89d2e;
   --color-border: #8d9ea28d;
+  --color-border-soft: rgba(15, 23, 42, 0.1);
+  --color-border-blue: rgba(37, 99, 235, 0.16);
   --color-panel: #fff;
+  --color-panel-soft: #f8fafc;
+  --color-panel-tint: #f3f7ff;
   --color-container: #f9f9f9;
   --color-subtitle: #666;
   --color-text: #050505;
@@ -17,10 +21,15 @@
 
   /* Border */
   --border-radius: 30px;
+  --border-radius-card: 18px;
+  --border-radius-panel: 22px;
+  --border-radius-mobile: 16px;
 
   /* Box */
   --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   --box-shadow-container: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --box-shadow-soft: 0 10px 28px rgba(15, 23, 42, 0.12);
+  --box-shadow-medium: 0 16px 38px rgba(15, 23, 42, 0.16);
 
   /* Font */
   --font-family-primary: "eb_garamond_sc08_regular", sans-serif;
@@ -29,6 +38,8 @@
 
   /* Padding */
   --padding-container: 10px;
+  --padding-card: 1.15rem;
+  --padding-card-mobile: 0.85rem;
 
   /* Transition */
   --transition: transform 0.3s ease, box-shadow 0.3s ease;

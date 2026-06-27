@@ -1,7 +1,10 @@
 .main {
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius-panel);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 250, 252, 0.96) 100%),
+    repeating-linear-gradient(0deg, rgba(37, 99, 235, 0.035) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, rgba(37, 99, 235, 0.035) 0 1px, transparent 1px 24px);
+  box-shadow: var(--box-shadow-medium);
   transition: min-height 0.5s ease-in-out, max-height 0.5s ease-in-out;
   overflow: hidden;
   position: relative;
@@ -12,8 +15,9 @@
   transition: opacity 0.25s ease-in-out;
   margin-bottom: 0;
   position: relative;
-  padding: 0.5em 0.5em 0.5em 0.5em;
+  padding: 1.15rem;
   width: 100%;
+  z-index: 2;
 }
 
 .main > .panel.inactive {
@@ -21,8 +25,16 @@
 }
 
 @media screen and (max-width: 736px) {
+  .main {
+    border-radius: var(--border-radius-mobile);
+  }
+
   .main > .panel {
     padding: 0.75rem;
+  }
+
+  .measurement-border {
+    padding: 0.85rem;
   }
 }
 
@@ -39,9 +51,100 @@
 
 .measurement-border {
   position: relative;
-  border: 2px solid #000;
-  padding: 20px;
-  background: #fff;
+  border: 2px solid #111827;
+  padding: 1.65rem;
+  background:
+    linear-gradient(180deg, rgba(250, 247, 237, 0.82), rgba(255, 255, 255, 0.16) 4.25rem),
+    linear-gradient(90deg, rgba(250, 247, 237, 0.82), rgba(255, 255, 255, 0.16) 4.25rem),
+    repeating-linear-gradient(0deg, rgba(37, 99, 235, 0.04) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, rgba(37, 99, 235, 0.04) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.03) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.03) 0 1px, transparent 1px 96px),
+    #fff;
+  box-shadow:
+    inset 20px 20px 0 rgba(201, 164, 74, 0.08),
+    inset 0 0 0 1px rgba(17, 24, 39, 0.08);
+}
+
+.sheetBackdrop {
+  inset: 1.65rem;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.sheetBackdrop::before {
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  content: "";
+  inset: 1rem;
+  position: absolute;
+}
+
+.sheetBackdrop::after {
+  background:
+    linear-gradient(135deg, transparent 0 47%, rgba(37, 99, 235, 0.08) 47% 48%, transparent 48% 100%),
+    linear-gradient(45deg, transparent 0 53%, rgba(37, 99, 235, 0.06) 53% 54%, transparent 54% 100%);
+  content: "";
+  height: min(34rem, 70%);
+  opacity: 0.72;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: min(34rem, 70%);
+}
+
+.sheetAxisHorizontal,
+.sheetAxisVertical {
+  background: rgba(201, 164, 74, 0.16);
+  position: absolute;
+}
+
+.sheetAxisHorizontal {
+  height: 1px;
+  left: 2rem;
+  right: 2rem;
+  top: 7.5rem;
+}
+
+.sheetAxisVertical {
+  bottom: 2rem;
+  left: 7.5rem;
+  top: 2rem;
+  width: 1px;
+}
+
+.sheetTitleBlock {
+  border: 1px solid rgba(17, 24, 39, 0.18);
+  bottom: 1.4rem;
+  height: 5.4rem;
+  position: absolute;
+  right: 1.4rem;
+  width: min(18rem, 42%);
+}
+
+.sheetTitleBlock::before,
+.sheetTitleBlock::after {
+  color: rgba(15, 23, 42, 0.28);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  position: absolute;
+  text-transform: uppercase;
+}
+
+.sheetTitleBlock::before {
+  content: "Civil Engineering";
+  left: 0.55rem;
+  top: 0.5rem;
+}
+
+.sheetTitleBlock::after {
+  border-top: 1px solid rgba(17, 24, 39, 0.12);
+  content: "Project Record";
+  inset: auto 0 0;
+  padding: 0.45rem 0.55rem;
 }
 
 .measurement-border::before,
@@ -55,26 +158,67 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 10px; /* Altura da linha horizontal no topo */
-  background: repeating-linear-gradient(
-    to right,
-    #000,
-    #000 1px,
-    transparent 1px,
-    transparent 10px
-  );
+  height: 22px;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.52);
+  background-color: #f5ecd0;
+  background-image:
+    repeating-linear-gradient(to right, transparent 0 49px, #111827 49px 51px),
+    repeating-linear-gradient(to right, transparent 0 24px, rgba(17, 24, 39, 0.82) 24px 25px),
+    repeating-linear-gradient(to right, transparent 0 9px, rgba(17, 24, 39, 0.62) 9px 10px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(201, 164, 74, 0.16));
+  background-position: left bottom, left bottom, left bottom, left top;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: 100% 21px, 100% 15px, 100% 8px, auto;
 }
 
 .measurement-border::after {
   top: 0;
   left: 0;
-  width: 10px; /* Largura da linha vertical à esquerda */
+  width: 22px;
   height: 100%;
-  background: repeating-linear-gradient(
-    to bottom,
-    #000,
-    #000 1px,
-    transparent 1px,
-    transparent 10px
-  );
+  border-right: 1px solid rgba(17, 24, 39, 0.52);
+  background-color: #f5ecd0;
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 49px, #111827 49px 51px),
+    repeating-linear-gradient(to bottom, transparent 0 24px, rgba(17, 24, 39, 0.82) 24px 25px),
+    repeating-linear-gradient(to bottom, transparent 0 9px, rgba(17, 24, 39, 0.62) 9px 10px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.46), rgba(201, 164, 74, 0.16));
+  background-position: right top, right top, right top, left top;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: 21px 100%, 15px 100%, 8px 100%, auto;
+}
+
+@media screen and (max-width: 736px) {
+  .measurement-border {
+    padding: 0.85rem;
+  }
+
+  .sheetBackdrop {
+    inset: 0.85rem;
+  }
+
+  .sheetBackdrop::after,
+  .sheetAxisHorizontal,
+  .sheetAxisVertical {
+    opacity: 0.45;
+  }
+
+  .sheetTitleBlock {
+    height: 4.5rem;
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .measurement-border {
+    padding: 0.65rem;
+  }
+
+  .sheetBackdrop {
+    inset: 0.65rem;
+  }
+
+  .sheetTitleBlock {
+    display: none;
+  }
 }

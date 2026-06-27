@@ -1,14 +1,15 @@
 @import "../../vars.css";
 
 .container {
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-container);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   transition: var(--transition);
 }
 
 .container:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .container:focus {
@@ -18,13 +19,14 @@
 
 .cardContainer {
   align-items: center;
-  background-color: var(--color-border);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-panel-soft) 100%);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   display: flex;
   flex-direction: column;
   margin: auto;
-  padding: var(--padding-container);
+  padding: var(--padding-card);
   transition: var(--transition);
   max-width: 100%;
   min-width: 0;
@@ -32,17 +34,18 @@
 }
 
 .cardContainer:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .panel {
   width: 100%;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: var(--padding-card);
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   transition: var(--transition);
   max-width: 100%;
   min-width: 0;
@@ -51,8 +54,8 @@
 
 @media screen and (max-width: 736px) {
   .cardContainer {
-    border-radius: 18px;
-    padding: 0.5rem;
+    border-radius: var(--border-radius-mobile);
+    padding: var(--padding-card-mobile);
     transform: none;
   }
 
@@ -61,8 +64,8 @@
   }
 
   .panel {
-    border-radius: 18px;
-    padding: 0.75rem;
+    border-radius: var(--border-radius-mobile);
+    padding: var(--padding-card-mobile);
     transform: none;
   }
 
@@ -82,6 +85,6 @@
 }
 
 .panel:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }

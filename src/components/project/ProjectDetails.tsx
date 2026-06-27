@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button, Col, Modal, CardHeader } from 'react-bootstrap';
+import { Card, Button, Col, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as iconsfa from 'react-icons/fa';
 import { wrapProjectFields } from '../../utils/wrapProjectFields';
@@ -49,6 +49,9 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
     const [showModal, setShowModal] = useState(false);
     const [currentImage, setCurrentImage] = useState('');
+    const [locationLabel, periodLabel] = placeandyear
+        ? placeandyear.split(/\s[|~]\s/).map((item) => item.trim())
+        : ['', ''];
 
     const handleImageClick = (imageUrl: string) => {
         setCurrentImage(imageUrl);
@@ -75,64 +78,149 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         return `${normalizedBase}${imageRef.replace(/^\/+/, '')}`;
     };
 
+    const mainImage = resolveUrl(mainImageUrl || imageRefs[0] || '');
+
+    const renderActivitySection = (
+        activitySection: string | { header: string; items: string[] },
+        sectionIndex: number
+    ) => {
+        if (typeof activitySection === 'string') {
+            return (
+                <li className={styles.projectActivityItem} key={`activity-${sectionIndex}`}>
+                    {wrapNumbersWithClass(activitySection, 'number')}
+                </li>
+            );
+        }
+
+        return (
+            <li className={styles.projectActivityGroup} key={`activity-${sectionIndex}`}>
+                {activitySection.header && (
+                    <strong className={prodetailsstyles.activityGroupTitle}>
+                        {wrapNumbersWithClass(activitySection.header, styles.number)}
+                    </strong>
+                )}
+                {Array.isArray(activitySection.items) && activitySection.items.length > 0 && (
+                    <ul className={`${styles.ulItems} ${styles['ulItems--tick']} ${prodetailsstyles.nestedActivityList}`}>
+                        {activitySection.items.map((item, itemIndex) => (
+                            <li className={styles.projectActivityItem} key={`activity-${sectionIndex}-${itemIndex}`}>
+                                {wrapNumbersWithClass(item, styles.number)}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </li>
+        );
+    };
+
     return (
-        <div className={containerstyles.cardContainer}>
-            <Col className={containerstyles.panel} aria-labelledby={`project-title-${title}`}>
-                <div className={`${cardstyles.cardContainer}`}>
-                    <CardHeader className={` ${cardstyles.cardHeader} text-center`}>
-                        <h2 className={prodetailsstyles.title} id={`project-title-${title}`}>
-                            {wrappedProject.title}
-                        </h2>
-                        <Card.Subtitle className={`${prodetailsstyles.subtitle}`}>
-                            <div className={prodetailsstyles.organization}>
-                                <span className={`${prodetailsstyles.orgTitle}`}> {organization} </span>
+        <div className={`${containerstyles.cardContainer} ${prodetailsstyles.detailShell}`}>
+            <Col className={`${containerstyles.panel} ${prodetailsstyles.detailPanel}`} aria-labelledby={`project-title-${title}`}>
+                <div className={`${cardstyles.cardContainer} ${prodetailsstyles.technicalSheet}`}>
+                    <section className={prodetailsstyles.technicalHero} aria-label="Project technical sheet">
+                        {mainImage ? (
+                            <button
+                                type="button"
+                                className={prodetailsstyles.heroImageButton}
+                                onClick={() => handleImageClick(mainImage)}
+                                aria-label={t("common.viewImage")}
+                            >
+                                <img src={mainImage} alt={`${title} main`} className={prodetailsstyles.heroImage} />
+                                <span className={prodetailsstyles.blueprintOverlay} aria-hidden="true" />
+                            </button>
+                        ) : (
+                            <div className={prodetailsstyles.blueprintFallback} aria-hidden="true">
+                                <div className={prodetailsstyles.fallbackFrame}>
+                                    <iconsfa.FaDraftingCompass className={prodetailsstyles.fallbackPrimaryIcon} />
+                                    <div className={prodetailsstyles.fallbackCopy}>
+                                        <span>{t("projects.technicalRecord")}</span>
+                                        <strong>{t("projects.mediaUnavailable")}</strong>
+                                    </div>
+                                    <div className={prodetailsstyles.fallbackPlan}>
+                                        <span />
+                                        <span />
+                                        <span />
+                                    </div>
+                                    <div className={prodetailsstyles.fallbackTools}>
+                                        <iconsfa.FaRulerCombined />
+                                        <iconsfa.FaHardHat />
+                                        <iconsfa.FaBuilding />
+                                    </div>
+                                </div>
                             </div>
-                            <div className={`${prodetailsstyles.place}`}>
-                                <iconsfa.FaMapMarkerAlt className={prodetailsstyles.icon} />{' '}
-                                <b>{placeandyear}</b>
+                        )}
+
+                        <div className={prodetailsstyles.heroContent}>
+                            <span className={prodetailsstyles.eyebrow}>Civil Engineering Project Record</span>
+                            <h2 className={prodetailsstyles.title} id={`project-title-${title}`}>
+                                {wrappedProject.title}
+                            </h2>
+                            <div className={prodetailsstyles.heroChips} aria-label="Project classifications">
+                                <span><iconsfa.FaHardHat className={prodetailsstyles.icon} /> Construction</span>
+                                <span><iconsfa.FaDraftingCompass className={prodetailsstyles.icon} /> Technical scope</span>
+                                <span><iconsfa.FaClipboardCheck className={prodetailsstyles.icon} /> Site record</span>
                             </div>
-                        </Card.Subtitle>
-                    </CardHeader>
-                    <p className={`${styles.projectdescription} number`}>
-                        <b>{wrappedProject.description}</b>
-                    </p>
-                    {Array.isArray(activities) &&
-                        activities.length > 0 &&
-                        activities.map((activitySection, sectionIndex) => (
-                            <div key={sectionIndex}>
-                                {typeof activitySection === 'string' ? (
-                                    <ul className={`${styles.ulItems} ${styles['ulItems--tick']}`}>
-                                        <li className={styles.projectActivityItem}>
-                                            {wrapNumbersWithClass(activitySection, 'number')}
-                                        </li>
-                                    </ul>
-                                ) : (
-                                    <div>
-                                        {activitySection.header && <h3>{activitySection.header}</h3>}
-                                        {Array.isArray(activitySection.items) && activitySection.items.length > 0 && (
-                                            <ul className={`${styles.ulItems} ${styles['ulItems--tick']}`}>
-                                                {activitySection.items.map((item, itemIndex) => (
-                                                    <li className={styles.projectActivityItem} key={itemIndex}>
-                                                        {wrapNumbersWithClass(item, styles.number)}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
+
+                            <Card.Subtitle className={`${prodetailsstyles.subtitle} ${prodetailsstyles.specGrid}`}>
+                                <div className={prodetailsstyles.specCard}>
+                                    <span className={prodetailsstyles.specLabel}>Organization</span>
+                                    <strong className={`${prodetailsstyles.specValue} ${prodetailsstyles.orgTitle}`}>
+                                        {organization}
+                                    </strong>
+                                </div>
+                                <div className={prodetailsstyles.specCard}>
+                                    <span className={prodetailsstyles.specLabel}>Location</span>
+                                    <strong className={prodetailsstyles.specValue}>
+                                        <iconsfa.FaMapMarkerAlt className={prodetailsstyles.icon} />
+                                        {locationLabel || placeandyear}
+                                    </strong>
+                                </div>
+                                {periodLabel && (
+                                    <div className={prodetailsstyles.specCard}>
+                                        <span className={prodetailsstyles.specLabel}>Period</span>
+                                        <strong className={prodetailsstyles.specValue}>
+                                            <iconsfa.FaCalendarAlt className={prodetailsstyles.icon} />
+                                            {periodLabel}
+                                        </strong>
                                     </div>
                                 )}
-                            </div>
-                        ))}
-                    <p className={styles.projectdescription}>
-                        <b>{wrappedProject.finalDescription}</b>
-                    </p>
-                    {mainImageUrl && (
-                      <div className={imagestyles.detailMainImageContainer}>
-                        <img src={resolveUrl(mainImageUrl)} alt={`${title} main`} className={imagestyles.detailMainImage} />
-                      </div>
-                    )}
+                                <div className={prodetailsstyles.specCard}>
+                                    <span className={prodetailsstyles.specLabel}>Discipline</span>
+                                    <strong className={prodetailsstyles.specValue}>Civil / Construction Engineering</strong>
+                                </div>
+                            </Card.Subtitle>
+                        </div>
+                    </section>
 
-                    {Array.isArray(imageRefs) && imageRefs.length > 0 && (
-                        <section aria-label={t("projects.imagesLabel")}>
+                    <div className={prodetailsstyles.detailContentGrid}>
+                        <section className={`${prodetailsstyles.contentSection} ${prodetailsstyles.overviewPanel}`}>
+                            <span className={prodetailsstyles.sectionKicker}>Project Overview</span>
+                            <p className={`${styles.projectdescription} number`}>
+                                <b>{wrappedProject.description}</b>
+                            </p>
+                        </section>
+
+                        {Array.isArray(activities) && activities.length > 0 && (
+                            <section className={`${prodetailsstyles.contentSection} ${prodetailsstyles.activityPanel}`}>
+                                <span className={prodetailsstyles.sectionKicker}>Technical Scope & Responsibilities</span>
+                                <ul className={`${styles.ulItems} ${styles['ulItems--tick']} ${prodetailsstyles.activityList}`}>
+                                    {activities.map(renderActivitySection)}
+                                </ul>
+                            </section>
+                        )}
+
+                        {wrappedProject.finalDescription && (
+                            <section className={`${prodetailsstyles.contentSection} ${prodetailsstyles.outcomePanel}`}>
+                                <span className={prodetailsstyles.sectionKicker}>Role & Outcome</span>
+                                <p className={styles.projectdescription}>
+                                    <b>{wrappedProject.finalDescription}</b>
+                                </p>
+                            </section>
+                        )}
+                    </div>
+
+                    <section className={prodetailsstyles.mediaSection} aria-label={t("projects.imagesLabel")}>
+                        <span className={prodetailsstyles.sectionKicker}>Project Gallery</span>
+                        {Array.isArray(imageRefs) && imageRefs.length > 0 ? (
                             <div className={imagestyles.detailGalleryGrid}>
                                 {imageRefs.map((imageRef, imgIndex) => {
                                     const imageUrl = resolveUrl(imageRef);
@@ -148,8 +236,16 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                                     );
                                 })}
                             </div>
-                        </section>
-                    )}
+                        ) : (
+                            <div className={prodetailsstyles.emptyGalleryState}>
+                                <iconsfa.FaImages className={prodetailsstyles.emptyGalleryIcon} />
+                                <div>
+                                    <strong>{t("projects.noImagesAvailable")}</strong>
+                                    <span>{t("projects.noImagesTechnicalRecord")}</span>
+                                </div>
+                            </div>
+                        )}
+                    </section>
 
                     <BimModelViewer asset={modelAsset} resolveUrl={resolveUrl} />
                 </div>

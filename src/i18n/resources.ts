@@ -25,6 +25,10 @@ const resources = {
         viewDetails: "View Details",
         notFound: "Project not found.",
         imagesLabel: "Project images",
+        technicalRecord: "Technical record",
+        mediaUnavailable: "Project media not available",
+        noImagesAvailable: "No project images are available for this record.",
+        noImagesTechnicalRecord: "This page is intentionally presented as a technical project record.",
       },
       model: {
         title: "3D / BIM Model",
@@ -189,6 +193,10 @@ const resources = {
         viewDetails: "Ver detalhes",
         notFound: "Projeto não encontrado.",
         imagesLabel: "Imagens do projeto",
+        technicalRecord: "Ficha técnica",
+        mediaUnavailable: "Media do projeto indisponível",
+        noImagesAvailable: "Não há imagens disponíveis para este registo.",
+        noImagesTechnicalRecord: "Esta página foi apresentada intencionalmente como uma ficha técnica do projeto.",
       },
       model: {
         title: "Modelo 3D / BIM",

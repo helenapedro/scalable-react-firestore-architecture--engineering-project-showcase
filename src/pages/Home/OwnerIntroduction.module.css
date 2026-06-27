@@ -1,14 +1,20 @@
 .rootCard {
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 100%);
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
+  border: 1px solid var(--color-border-blue);
+  overflow: hidden;
 }
 
 .leftCol {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 
 .name {
-  margin-top: 0.5rem;
+  margin-top: 0.85rem;
   margin-bottom: 0.35rem;
   line-height: 1.1;
 }
@@ -23,9 +29,10 @@
 .rightHeadline {
   color: #0f172a;
   font-family: "eb_garamond_sc08_regular", sans-serif;
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 2.5vw, 2.35rem);
   line-height: 1.25;
   margin: 0 0 0.85rem;
+  max-width: 28rem;
 }
 
 .actions {
@@ -33,19 +40,22 @@
   justify-content: center;
   gap: 0.6rem;
   flex-wrap: wrap;
+  margin-top: 0.55rem;
 }
 
 .summaryPanel {
-  border: 1px solid #dbe7ff;
-  background: #f6f9ff;
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
+  border: 1px solid var(--color-border-blue);
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #f1f6ff 100%);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  max-width: 42rem;
 }
 
 .summaryText {
   font-family: "eb_garamond_sc12_regular", sans-serif;
-  font-size: 1.3rem;
-  line-height: 1.5;
+  font-size: 1.32rem;
+  line-height: 1.55;
   margin-bottom: 0;
 }
 
@@ -56,10 +66,15 @@
 
   .rightHeadline {
     font-size: 1.55rem;
+    max-width: none;
     text-align: center;
   }
 
   .summaryText {
     font-size: 1.15rem;
+  }
+
+  .summaryPanel {
+    padding: 0.9rem;
   }
 }

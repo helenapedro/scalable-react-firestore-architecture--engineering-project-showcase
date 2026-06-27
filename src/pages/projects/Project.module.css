@@ -2,32 +2,36 @@
 
 .project {
   align-items: center;
-  background-color: var(--color-border);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(141, 158, 162, 0.24));
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   display: flex;
   flex-direction: column;
   margin: auto;
   max-width: 100%;
   min-width: 0;
   overflow: hidden;
-  padding: var(--padding-container);
+  padding: var(--padding-card);
   transition: var(--transition);
   width: 100%;
 }
 
 .project:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .panel {
   width: 100%;
   margin-bottom: 20px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: var(--padding-card);
+  background:
+    linear-gradient(180deg, #ffffff 0%, var(--color-panel-soft) 100%);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   max-width: 100%;
   min-width: 0;
   overflow: hidden;
@@ -35,8 +39,8 @@
 }
 
 .panel:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .header {
@@ -137,7 +141,7 @@
 
 .ulItems {
   list-style: disc;
-  padding-left: 1;
+  padding-left: 1.25rem;
 }
 
 .ulItems--tick {
@@ -153,8 +157,15 @@
 }
 
 .projectActivityItem {
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  line-height: 1.35;
+  margin-bottom: 0.55rem;
+  overflow-wrap: anywhere;
+  padding-left: 0.5rem;
+}
+
+.projectActivityGroup {
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
   overflow-wrap: anywhere;
   padding-left: 0.5rem;
 }
@@ -166,8 +177,8 @@
 @media (max-width: 768px) {
   .project,
   .panel {
-    border-radius: 18px;
-    padding: 0.65rem;
+    border-radius: var(--border-radius-mobile);
+    padding: var(--padding-card-mobile);
     transform: none;
   }
 

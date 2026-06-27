@@ -1,15 +1,16 @@
 @import "../vars.css";
 
 .panel {
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-container);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
   transition: var(--transition);
-  padding: 16px;
+  padding: var(--padding-card);
 }
 
 .panel:hover {
   transform: translateY(-3px);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .panel:focus {
@@ -20,6 +21,7 @@
 .home-title {
   color: var(--color-primary);
   font-size: 2em;
+  line-height: 1.12;
   margin-bottom: 10px;
 }
 
@@ -64,5 +66,15 @@
 
   .home-text {
     font-size: 1em;
+  }
+
+  .panel {
+    border-radius: var(--border-radius-mobile);
+    padding: var(--padding-card-mobile);
+    transform: none;
+  }
+
+  .panel:hover {
+    transform: none;
   }
 }

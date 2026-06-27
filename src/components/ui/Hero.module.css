@@ -14,13 +14,14 @@
 .fullName {
   color: var(--color-primary);
   font-family: var(--font-family-secundary);
+  letter-spacing: 0;
   margin-top: 2px;
 }
 
 .experienceYear {
   /* font-weight: bold; */
   font-family: var(--font-family-numbers);
-  font-size: large;
+  font-size: 0.95em;
 }
 
 .colorTwo,
