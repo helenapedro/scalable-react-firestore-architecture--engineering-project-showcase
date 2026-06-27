@@ -131,14 +131,15 @@
 
 @media screen and (max-width: 980px) {
   .nav {
-    min-height: 5.75em;
+    min-height: 6.85em;
   }
 
   .menu {
     align-items: center;
     display: flex;
+    column-gap: 0.4rem;
     margin: 0 auto;
-    row-gap: 0.4rem;
+    row-gap: 0.72rem;
   }
 
   .nav a span {
@@ -147,11 +148,11 @@
 
   .nav a {
     display: inline-block;
-    font-size: 2.5em;
+    font-size: 2.45em;
     gap: 0;
     height: 1em;
     line-height: 0.9em;
-    margin: 0 0.25em;
+    margin: 0 0.2em;
     min-width: 0;
     padding: 0;
     width: 1em;
@@ -162,30 +163,39 @@
   }
 
   .nav a:after {
-    bottom: -0.75em;
+    bottom: -0.5em;
   }
 
   .languageToggle {
-    flex-basis: 100%;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+    flex-basis: auto;
     display: flex;
     justify-content: center;
-    margin: 0;
+    margin: 0 auto;
     order: 2;
+    padding: 0.18rem;
   }
 
   .languageToggle button {
-    background: rgba(255, 255, 255, 0.12);
-    font-size: 0.72rem;
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
     line-height: 1;
-    min-height: 1.85rem;
-    min-width: 2.25rem;
-    padding: 0.25rem 0.45rem;
+    min-height: 1.55rem;
+    min-width: 2.45rem;
+    padding: 0.25rem 0.55rem;
   }
 }
 
 @media screen and (max-width: 360px) {
   .nav {
-    min-height: 5.25em;
+    min-height: 6.35em;
   }
 
   .nav a {
