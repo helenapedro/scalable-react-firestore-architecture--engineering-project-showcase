@@ -31,6 +31,9 @@ The React app reads project metadata from Firestore. The metadata contains image
 
 Relevant files:
 
+- `src/components/project/ProjectDetails.tsx`
+- `src/components/project/ProjectCard.tsx`
+- `src/components/project/projectMedia.ts`
 - `src/components/project/ProjectDetails.jsx`
 - `src/components/project/ProjectMediaGallery.jsx`
 - `src/components/project/projectDetailsUtils.js`
@@ -45,6 +48,10 @@ Current frontend behavior:
 - Additional images render through "Show More Images".
 - Gallery images use `loading="lazy"`.
 - Gallery images use `decoding="async"`.
+- The active TypeScript project detail route normalizes both legacy string image references and structured media objects.
+- `imageRefs` remains the first supported source when present; `media.images` is used as the backward-compatible fallback.
+- Structured media objects can provide `thumbUrl`, `thumbnailUrl`, `largeUrl`, `originalUrl`, `alt`, `width`, and `height`.
+- The gallery can render a lighter display reference while preserving the original/full reference for modal preview.
 
 Current admin/upload behavior:
 
@@ -131,9 +138,9 @@ The application currently supports simple image references:
 
 This is simple and backward compatible, but it does not carry image dimensions, alt text, derivatives, or ordering metadata beyond array position.
 
-### Recommended Media Object Model
+### Supported Media Object Model
 
-Move toward structured media objects while preserving support for legacy string arrays.
+The frontend now supports structured media objects while preserving support for legacy string arrays. Firestore records do not need to be migrated immediately; this support lets new records adopt richer media metadata gradually.
 
 ```json
 {
@@ -288,9 +295,9 @@ The presign handler validates:
 
 ### Phase 2: Add Optional Structured Objects
 
-- Allow `media.images` to contain objects.
-- Map string values into object-like runtime records.
-- Add `thumbUrl`, `alt`, `width`, and `height` support.
+- Allow `media.images` to contain objects. Completed in the active TypeScript detail route.
+- Map string values into object-like runtime records. Completed in `src/components/project/projectMedia.ts`.
+- Add `thumbUrl`, `alt`, `width`, and `height` support. Completed in runtime rendering; Firestore backfill remains optional.
 - Keep admin UI backward compatible.
 
 ### Phase 3: Generate Derivatives
@@ -311,10 +318,10 @@ The presign handler validates:
 - [ ] Public project media loads from CloudFront or configured CDN.
 - [ ] Firestore stores references, not image binaries.
 - [ ] Project listing does not eagerly load full galleries.
-- [ ] Project details render a controlled initial image batch.
-- [ ] Gallery images use lazy loading and async decoding.
+- [x] Project details render a controlled initial image batch.
+- [x] Gallery images use lazy loading and async decoding.
 - [ ] Admin upload uses presigned URLs.
 - [ ] AWS credentials are not exposed to the frontend.
 - [ ] Upload validation enforces type and size limits.
 - [ ] Cache headers are long-lived for immutable media.
-- [ ] The system remains backward compatible with existing `imageRefs`.
+- [x] The system remains backward compatible with existing `imageRefs`.

@@ -11,6 +11,8 @@ import prodetailsstyles from '../../components/ui/ProjectDetails.module.css';
 import containerstyles from '../../components/ui/Container.module.css';
 import cardstyles from '../../components/ui/card.module.css';
 import BimModelViewer, { type BimModelAsset } from './BimModelViewer';
+import type { ProjectImageRef } from '../../types';
+import { getProjectImageFullRef, normalizeProjectImages } from './projectMedia';
 
 const GALLERY_BATCH_SIZE = 6;
 
@@ -22,7 +24,10 @@ export interface ProjectDetailsProps {
     activities: (string | { header: string; items: string[] })[];
     finalDescription: string;
     mainImageUrl: string;
-    imageRefs: string[];
+    mainImageRef?: ProjectImageRef | null;
+    imageRefs?: ProjectImageRef[];
+    mediaImages?: ProjectImageRef[];
+    language?: string;
     modelAsset?: BimModelAsset | null;
 }
 
@@ -34,7 +39,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
     activities = [],
     finalDescription = '',
     mainImageUrl,
+    mainImageRef = null,
     imageRefs = [],
+    mediaImages = [],
+    language = 'en',
     modelAsset = null,
 }) => {
     const { t } = useTranslation();
@@ -56,19 +64,25 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         ? placeandyear.split(/\s[|~]\s/).map((item) => item.trim())
         : ['', ''];
 
-    const galleryImageRefs = useMemo(
-        () => (Array.isArray(imageRefs) ? imageRefs.filter(Boolean) : []),
-        [imageRefs]
+    const galleryImages = useMemo(
+        () =>
+            normalizeProjectImages({
+                imageRefs,
+                mediaImages,
+                language,
+                fallbackAlt: title || t("common.projectImage"),
+            }),
+        [imageRefs, mediaImages, language, title, t]
     );
-    const visibleGalleryImageRefs = useMemo(
-        () => galleryImageRefs.slice(0, visibleImageCount),
-        [galleryImageRefs, visibleImageCount]
+    const visibleGalleryImages = useMemo(
+        () => galleryImages.slice(0, visibleImageCount),
+        [galleryImages, visibleImageCount]
     );
-    const hasMoreGalleryImages = visibleImageCount < galleryImageRefs.length;
+    const hasMoreGalleryImages = visibleImageCount < galleryImages.length;
 
     useEffect(() => {
         setVisibleImageCount(GALLERY_BATCH_SIZE);
-    }, [galleryImageRefs]);
+    }, [galleryImages]);
 
     const handleImageClick = (imageUrl: string) => {
         setCurrentImage(imageUrl);
@@ -95,7 +109,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         return `${normalizedBase}${imageRef.replace(/^\/+/, '')}`;
     };
 
-    const mainImage = resolveUrl(mainImageUrl || imageRefs[0] || '');
+    const mainImage = resolveUrl(mainImageUrl || getProjectImageFullRef(mainImageRef) || galleryImages[0]?.fullRef || '');
 
     const renderActivitySection = (
         activitySection: string | { header: string; items: string[] },
@@ -242,24 +256,27 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
                     <section className={prodetailsstyles.mediaSection} aria-label={t("projects.imagesLabel")}>
                         <span className={prodetailsstyles.sectionKicker}>Project Gallery</span>
-                        {galleryImageRefs.length > 0 ? (
+                        {galleryImages.length > 0 ? (
                             <>
                                 <div className={imagestyles.detailGalleryGrid}>
-                                    {visibleGalleryImageRefs.map((imageRef, imgIndex) => {
-                                    const imageUrl = resolveUrl(imageRef);
+                                    {visibleGalleryImages.map((image, imgIndex) => {
+                                    const imageUrl = resolveUrl(image.fullRef);
+                                    const displayUrl = resolveUrl(image.displayRef);
                                     return (
-                                        <div className={imagestyles.detailGalleryItem} key={`${imageRef}-${imgIndex}`}>
+                                        <div className={imagestyles.detailGalleryItem} key={`${image.id}-${imgIndex}`}>
                                             <button
                                                 type="button"
                                                 className={imagestyles.imageButton}
                                                 onClick={() => handleImageClick(imageUrl)}
                                             >
                                                 <img
-                                                    src={imageUrl}
-                                                    alt={`${t("common.projectImage")} ${imgIndex + 1}`}
+                                                    src={displayUrl}
+                                                    alt={image.alt}
                                                     className={imagestyles.detailGalleryImage}
                                                     loading="lazy"
                                                     decoding="async"
+                                                    width={image.width}
+                                                    height={image.height}
                                                 />
                                             </button>
                                         </div>
@@ -273,7 +290,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                                             variant="outline-secondary"
                                             onClick={() =>
                                                 setVisibleImageCount((count) =>
-                                                    Math.min(count + GALLERY_BATCH_SIZE, galleryImageRefs.length)
+                                                    Math.min(count + GALLERY_BATCH_SIZE, galleryImages.length)
                                                 )
                                             }
                                         >

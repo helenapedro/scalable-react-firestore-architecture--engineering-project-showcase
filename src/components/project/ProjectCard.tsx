@@ -4,7 +4,7 @@ import useData from '../../Hooks/useData';
 import LoadingError from '../comon/LoadingError';
 import styles from '../../pages/projects/Project.module.css';
 import ProjectDetails from './ProjectDetails';
-import type { Project } from '../../types/index';
+import type { Project, ProjectImageRef, ProjectModelAsset } from '../../types/index';
 import { getLanguageFromPath } from '../../i18n/routes';
 import { localizeProject } from '../../i18n/localizedValue';
 
@@ -18,33 +18,12 @@ type NormalizedProject = Project & {
     label?: string;
   };
   media?: {
-    mainImage?: string;
-    images?: string[];
-    model?: {
-      url: string;
-      title?: string;
-      format?: string;
-      sizeLabel?: string;
-      source?: string;
-      previewImage?: string;
-    };
+    mainImage?: ProjectImageRef;
+    images?: ProjectImageRef[];
+    model?: ProjectModelAsset;
   };
-  modelAsset?: {
-    url: string;
-    title?: string;
-    format?: string;
-    sizeLabel?: string;
-    source?: string;
-    previewImage?: string;
-  };
-  modelAssets?: Array<{
-    url: string;
-    title?: string;
-    format?: string;
-    sizeLabel?: string;
-    source?: string;
-    previewImage?: string;
-  }>;
+  modelAsset?: ProjectModelAsset;
+  modelAssets?: ProjectModelAsset[];
 };
 
 const ProjectCard: React.FC = () => {
@@ -68,8 +47,10 @@ const ProjectCard: React.FC = () => {
             ...(Array.isArray(project.results) ? project.results : []),
           ],
         finalDescription: project.finalDescription || project.projectOutcome || "",
-        mainImageUrl: project.mainImageUrl || project.media?.mainImage || "",
+        mainImageUrl: project.mainImageUrl || "",
+        mainImageRef: project.media?.mainImage || null,
         imageRefs: project.imageRefs || project.media?.images || [],
+        mediaImages: project.media?.images || [],
         modelAsset: project.modelAsset || project.media?.model || project.modelAssets?.[0] || null,
       }
     : null;
@@ -86,7 +67,10 @@ const ProjectCard: React.FC = () => {
           activities={detailProject.activities}
           finalDescription={detailProject.finalDescription}
           mainImageUrl={detailProject.mainImageUrl}
+          mainImageRef={detailProject.mainImageRef}
           imageRefs={detailProject.imageRefs}
+          mediaImages={detailProject.mediaImages}
+          language={language}
           modelAsset={detailProject.modelAsset}
         />
       )}

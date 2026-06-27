@@ -7,6 +7,34 @@ export type Activity =
       items: string[];
     };
 
+export type LocalizedText =
+  | string
+  | {
+      en?: string;
+      pt?: string;
+      [locale: string]: string | undefined;
+    };
+
+export interface ProjectImageAsset {
+  id?: string;
+  order?: number;
+  alt?: LocalizedText;
+  originalUrl?: string;
+  url?: string;
+  fullUrl?: string;
+  src?: string;
+  thumbUrl?: string;
+  thumbnailUrl?: string;
+  largeUrl?: string;
+  width?: number;
+  height?: number;
+  contentType?: string;
+  sizeBytes?: number;
+  createdAt?: string;
+}
+
+export type ProjectImageRef = string | ProjectImageAsset;
+
 export interface Project {
   id: string; // doc id (slug)
   title: string;
@@ -16,7 +44,13 @@ export interface Project {
   activities: Activity[];
   finalDescription: string;
   mainImageUrl: string;
-  imageRefs: string[];
+  imageRefs: ProjectImageRef[];
+  media?: {
+    mainImage?: ProjectImageRef;
+    images?: ProjectImageRef[];
+    thumbnails?: string[];
+    model?: ProjectModelAsset;
+  };
   slug: string;
   isVisible: boolean;
   createdAt: Timestamp;
