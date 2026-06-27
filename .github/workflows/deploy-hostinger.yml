@@ -40,4 +40,4 @@ jobs:
           username: ${{ vars.FTP_USERNAME || secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD }}
           local-dir: ./build/
-          server-dir: ./
+          server-dir: /
