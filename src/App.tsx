@@ -67,9 +67,12 @@ const LanguageSync: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const basename = process.env.PUBLIC_URL || undefined;
+
   return React.createElement(
     Router,
     {
+      basename,
       future: {
         v7_startTransition: true,
         v7_relativeSplatPath: true,
