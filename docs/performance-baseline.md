@@ -281,6 +281,46 @@ The live site now matches the bridge intent:
 - Homepage remains out of scope for this bridge. It still loads many images and should be handled as a separate homepage performance task.
 - CLS remains high in the CDP measurements and should be addressed through layout stability work after the gallery-loading bridge is closed.
 
+## Priority 2 Production Verification: Automated Deploy With Environment Variables
+
+Method:
+
+- Added GitHub Actions environment binding for production build variables.
+- Confirmed the deployment workflow completed successfully on run `28288197363`.
+- Confirmed production now serves the automated deploy bundle:
+  - `main.js`: `/static/js/main.02b591ae.js`
+  - `main.css`: `/static/css/main.ca2b9470.css`
+- Re-ran `scripts/measure-production-performance.mjs` with `PERF_REPORT_LABEL=production-after-priority2`.
+- Reports:
+  - `docs/performance-reports/production-after-priority2-performance-summary.json`
+  - `docs/performance-reports/production-after-priority2-performance-cdp.json`
+
+### Production After Priority 2 Runtime Schema Support
+
+| Route | FCP | LCP | TBT Approx. | CLS | Requests | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `/` | 2,324 ms | 6,840 ms | 2,125 ms | 0.8572 | 106 | 74 | 73 | 0 | 0 |
+| `/projects/renovation-and-expansion-of-a-2-story-residence` | 936 ms | 2,640 ms | 474 ms | 0.8131 | 17 | 6 | 7 | 6 | 7 |
+| `/projects/trainee-program-startme-2021-8th-edition` | 580 ms | 1,832 ms | 420 ms | 0.8131 | 18 | 4 | 7 | 6 | 7 |
+
+### Priority 2 Result
+
+The automated production deploy now matches the expected project detail behavior:
+
+- GitHub Actions validates required production `REACT_APP_*` values before build.
+- The production bundle is built with the environment variables needed for Firestore and CDN media.
+- Project detail routes preserve the bridge performance behavior after Priority 2 schema support.
+- Existing legacy `imageRefs` data still renders correctly.
+- The rendered detail routes still expose `loading="lazy"` on 6 gallery images and `decoding="async"` on 7 rendered images.
+- Initial project detail image requests remain around the first gallery batch instead of the full gallery.
+- CloudFront delivery remains active through `dh09x5tu10bt3.cloudfront.net`.
+
+### Notes and Limitations
+
+- The homepage remains the largest performance problem: 74 image requests, 73 DOM images, 36.65 MB transferred, LCP 6.84s, and TBT approximation 2.125s in this run.
+- CLS remains high across measured routes and should be treated as a separate layout stability task.
+- Detail-route transfer sizes in this specific CDP run were not used as a primary comparison signal because the reported values were lower than expected for image bytes. Image request count and DOM/lazy/async attributes are the reliable validation signals for this Priority 2 check.
+
 ## Routes to Measure
 
 Use one homepage route, one listing route, and at least two image-heavy project detail routes.
