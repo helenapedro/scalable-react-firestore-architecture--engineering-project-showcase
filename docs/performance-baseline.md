@@ -242,6 +242,45 @@ The bridge hardening validates the intended architecture on the built app:
 - Full gallery rendering is deferred until user action.
 - Existing `imageRefs` / `media.images` compatibility is preserved.
 
+## Production Verification After Manual Hostinger Upload
+
+Method:
+
+- Manually uploaded the bridge build to Hostinger.
+- Confirmed production manifest changed to the bridge build:
+  - `main.js`: `/static/js/main.b8d949b8.js`
+  - `main.css`: `/static/css/main.631a2667.css`
+- Re-ran `scripts/measure-production-performance.mjs` with `PERF_REPORT_LABEL=production-after-bridge`.
+- Reports:
+  - `docs/performance-reports/production-after-bridge-performance-summary.json`
+  - `docs/performance-reports/production-after-bridge-performance-cdp.json`
+
+### Production Before vs After Bridge
+
+| Route | State | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Renovation detail | Before bridge | 31 | 1,171,841 bytes | 17 | 16 | 0 | 0 |
+| Renovation detail | After bridge | 20 | 250,419 bytes | 6 | 7 | 6 | 7 |
+| STARTME detail | Before bridge | 31 | 1,154,883 bytes | 17 | 16 | 0 | 0 |
+| STARTME detail | After bridge | 18 | 143,681 bytes | 4 | 7 | 6 | 7 |
+
+### Production Bridge Result
+
+The live site now matches the bridge intent:
+
+- Project detail routes no longer load the full measured galleries upfront.
+- Gallery DOM renders the hero plus first batch of 6 gallery images.
+- Gallery images expose `loading="lazy"`.
+- Rendered project images expose `decoding="async"`.
+- CDN delivery is preserved through `dh09x5tu10bt3.cloudfront.net`.
+- Initial transferred bytes dropped by about 79% on the renovation detail route and about 88% on the STARTME detail route in the measured runs.
+
+### Notes and Limitations
+
+- Web Vitals timing values in the post-deploy run were noisier than the local bridge run. The structural media-loading evidence is stable and should be treated as the main validation for this bridge step.
+- Homepage remains out of scope for this bridge. It still loads many images and should be handled as a separate homepage performance task.
+- CLS remains high in the CDP measurements and should be addressed through layout stability work after the gallery-loading bridge is closed.
+
 ## Routes to Measure
 
 Use one homepage route, one listing route, and at least two image-heavy project detail routes.
