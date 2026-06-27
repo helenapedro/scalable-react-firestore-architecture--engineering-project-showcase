@@ -31,7 +31,6 @@ yarn-error.log*
 
 /src/App.test.js
 /src/App.css
-/src/index.css
 /src/rows.css
 
 # local collaboration notes

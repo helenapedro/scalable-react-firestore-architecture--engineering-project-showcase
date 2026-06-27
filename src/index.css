@@ -1,0 +1,17 @@
+@import "./styles/App.module.css";
+@import "./styles/rows.css";
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: #3f0502;
+  background-image: url("../public/bg0.webp");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
