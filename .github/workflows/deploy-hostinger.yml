@@ -40,4 +40,4 @@ jobs:
           username: ${{ vars.FTP_USERNAME || secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD }}
           local-dir: ./build/
-          server-dir: /public_html/
+          server-dir: /domains/zepedro-portfolio.hmpedro.com/public_html/
