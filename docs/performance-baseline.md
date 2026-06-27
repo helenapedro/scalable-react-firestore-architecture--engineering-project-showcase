@@ -108,6 +108,100 @@ Initial observations:
 - Browser automation was unavailable during this pass because the in-app browser webview did not attach.
 - The next baseline pass should use Chrome DevTools or Lighthouse to confirm user-facing timing metrics.
 
+## Formal Production Measurement: 2026-06-27
+
+Method:
+
+- Tooling: local Chrome headless through Chrome DevTools Protocol.
+- Script: `scripts/measure-production-performance.mjs`.
+- Reports:
+  - `docs/performance-reports/production-performance-summary.json`
+  - `docs/performance-reports/production-performance-cdp.json`
+- Cache: browser cache disabled through CDP.
+- Notes: TBT is approximated from observed long tasks. Metrics may differ from Lighthouse because this is a direct CDP run, not a Lighthouse audit with Lighthouse throttling/scoring.
+
+### Route Summary
+
+| Route | FCP | LCP | TBT Approx. | CLS | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `/` | 1,364 ms | 4,364 ms | 1,355 ms | 0.1958 | 106 | 4,731,956 bytes | 74 | 73 | 0 | 0 |
+| `/projects/renovation-and-expansion-of-a-2-story-residence` | 1,536 ms | 2,420 ms | 319 ms | 0.1219 | 31 | 1,173,130 bytes | 17 | 16 | 0 | 0 |
+| `/projects/trainee-program-startme-2021-8th-edition` | 476 ms | 1,560 ms | 354 ms | 0.0986 | 31 | 1,154,854 bytes | 17 | 16 | 0 | 0 |
+
+### Host Breakdown
+
+Homepage:
+
+- `zepedro-portfolio.hmpedro.com`: 9 requests.
+- `firestore.googleapis.com`: 22 requests.
+- `dh09x5tu10bt3.cloudfront.net`: 73 requests.
+- `fonts.googleapis.com`: 1 request.
+- `drive.google.com`: 1 request.
+
+Renovation project route:
+
+- `zepedro-portfolio.hmpedro.com`: 9 requests.
+- `firestore.googleapis.com`: 6 requests.
+- `dh09x5tu10bt3.cloudfront.net`: 15 requests.
+- `fonts.googleapis.com`: 1 request.
+
+STARTME project route:
+
+- `zepedro-portfolio.hmpedro.com`: 9 requests.
+- `firestore.googleapis.com`: 6 requests.
+- `dh09x5tu10bt3.cloudfront.net`: 15 requests.
+- `fonts.googleapis.com`: 1 request.
+
+### Largest Waterfall Entries
+
+Homepage:
+
+| Type | Path | Host | Transfer | Duration |
+| --- | --- | --- | ---: | ---: |
+| Script | `/static/js/main.96d7d1b9.js` | `zepedro-portfolio.hmpedro.com` | 932,521 bytes | 767 ms |
+| Image | `/static/media/bg0.623f559fde2521cca5d6.webp` | `zepedro-portfolio.hmpedro.com` | 809,368 bytes | 908 ms |
+| Other | `/paradoxo.png` | `zepedro-portfolio.hmpedro.com` | 455,958 bytes | 373 ms |
+| Other | `/paradoxo.png` | `zepedro-portfolio.hmpedro.com` | 455,946 bytes | 237 ms |
+| Image | `/m10.jpg` | `dh09x5tu10bt3.cloudfront.net` | 199,990 bytes | 553 ms |
+
+Renovation project route:
+
+| Type | Path | Host | Transfer | Duration |
+| --- | --- | --- | ---: | ---: |
+| Image | `/cd6.jpg` | `dh09x5tu10bt3.cloudfront.net` | 178,873 bytes | 308 ms |
+| Image | `/cd8.jpg` | `dh09x5tu10bt3.cloudfront.net` | 117,468 bytes | 375 ms |
+| Image | `/cd10.jpg` | `dh09x5tu10bt3.cloudfront.net` | 108,620 bytes | 434 ms |
+| Image | `/cd9.jpg` | `dh09x5tu10bt3.cloudfront.net` | 92,494 bytes | 441 ms |
+| Image | `/cd4.jpg` | `dh09x5tu10bt3.cloudfront.net` | 88,909 bytes | 189 ms |
+
+STARTME project route:
+
+| Type | Path | Host | Transfer | Duration |
+| --- | --- | --- | ---: | ---: |
+| Image | `/st9.jpg` | `dh09x5tu10bt3.cloudfront.net` | 130,725 bytes | 331 ms |
+| Image | `/st7.jpg` | `dh09x5tu10bt3.cloudfront.net` | 107,043 bytes | 98 ms |
+| Image | `/st4.jpg` | `dh09x5tu10bt3.cloudfront.net` | 102,987 bytes | 196 ms |
+| Image | `/st12.jpg` | `dh09x5tu10bt3.cloudfront.net` | 97,674 bytes | 281 ms |
+| Image | `/st8.jpg` | `dh09x5tu10bt3.cloudfront.net` | 76,513 bytes | 153 ms |
+
+### Findings
+
+1. CloudFront delivery is active for project media. The measured heavy project routes each made 15 requests to `dh09x5tu10bt3.cloudfront.net`.
+2. Image-heavy project detail pages are currently in the "seconds, not minutes" target range. The measured detail routes transferred about 1.15-1.17 MB and reached LCP between 1.56s and 2.42s.
+3. The homepage is heavier than the detail pages: 4.73 MB transferred, 74 image requests, LCP 4.36s, TBT 1.35s, and CLS 0.1958. This should be treated as a follow-up optimization target.
+4. The measured production DOM reported 0 images with `loading="lazy"` and 0 with `decoding="async"` on all measured routes. This suggests the deployed route/component path may not be using the newer lazy/progressive gallery implementation, or those attributes are not present in the production build currently deployed.
+5. The two heavy project routes loaded 15 CloudFront image requests each during the measurement. That means current production behavior is still loading the full measured galleries, not only a first batch of 6 images.
+6. The JavaScript bundle and static visual assets are secondary performance targets. The main script and homepage background are among the largest non-gallery resources.
+
+### Follow-Up Actions
+
+- Confirm which project detail component is active in production and align it with `ProjectMediaGallery` progressive rendering.
+- Add or restore `loading="lazy"` and `decoding="async"` in the active production image paths.
+- Re-run this measurement after frontend hardening to confirm image request count drops on first load.
+- Optimize homepage image strategy separately from project detail pages.
+- Consider code splitting or bundle analysis for the main JavaScript bundle.
+- Reduce CLS on homepage and the renovation detail route by reserving stable image/container dimensions.
+
 ## Routes to Measure
 
 Use one homepage route, one listing route, and at least two image-heavy project detail routes.
