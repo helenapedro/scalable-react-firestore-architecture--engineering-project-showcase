@@ -13,6 +13,7 @@ jobs:
   deploy:
     name: Build and upload
     runs-on: ubuntu-latest
+    environment: REACT_APP_BASE_UR
 
     env:
       CI: false
