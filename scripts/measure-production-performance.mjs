@@ -7,11 +7,19 @@ const chromePath =
   process.env.CHROME_PATH ||
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 
-const urls = [
-  "https://zepedro-portfolio.hmpedro.com/",
-  "https://zepedro-portfolio.hmpedro.com/projects/renovation-and-expansion-of-a-2-story-residence",
-  "https://zepedro-portfolio.hmpedro.com/projects/trainee-program-startme-2021-8th-edition",
+const defaultBaseUrl = "https://zepedro-portfolio.hmpedro.com";
+const baseUrl = (process.env.PERF_BASE_URL || defaultBaseUrl).replace(/\/+$/, "");
+const defaultPaths = [
+  "/",
+  "/projects/renovation-and-expansion-of-a-2-story-residence",
+  "/projects/trainee-program-startme-2021-8th-edition",
 ];
+const urls = process.env.PERF_URLS
+  ? process.env.PERF_URLS.split(",").map((url) => url.trim()).filter(Boolean)
+  : defaultPaths.map((routePath) => `${baseUrl}${routePath}`);
+const reportLabel =
+  process.env.PERF_REPORT_LABEL ||
+  (baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1") ? "local" : "production");
 
 const outDir = path.resolve("docs", "performance-reports");
 const port = Number(process.env.CDP_PORT || 9223);
@@ -344,13 +352,14 @@ async function main() {
       topHosts: report.network.byHost,
     }));
 
-    const reportPath = path.join(outDir, "production-performance-cdp.json");
-    const summaryPath = path.join(outDir, "production-performance-summary.json");
+    const reportPath = path.join(outDir, `${reportLabel}-performance-cdp.json`);
+    const summaryPath = path.join(outDir, `${reportLabel}-performance-summary.json`);
     await fs.writeFile(reportPath, JSON.stringify(reports, null, 2));
     await fs.writeFile(summaryPath, JSON.stringify(summary, null, 2));
     console.log(JSON.stringify({ reportPath, summaryPath, summary }, null, 2));
   } finally {
     chrome.kill();
+    await fs.rm(userDataDir, { recursive: true, force: true }).catch(() => {});
   }
 }
 

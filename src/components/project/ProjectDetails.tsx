@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Card, Button, Col, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as iconsfa from 'react-icons/fa';
@@ -11,6 +11,8 @@ import prodetailsstyles from '../../components/ui/ProjectDetails.module.css';
 import containerstyles from '../../components/ui/Container.module.css';
 import cardstyles from '../../components/ui/card.module.css';
 import BimModelViewer, { type BimModelAsset } from './BimModelViewer';
+
+const GALLERY_BATCH_SIZE = 6;
 
 export interface ProjectDetailsProps {
     title: string;
@@ -49,9 +51,24 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
     const [showModal, setShowModal] = useState(false);
     const [currentImage, setCurrentImage] = useState('');
+    const [visibleImageCount, setVisibleImageCount] = useState(GALLERY_BATCH_SIZE);
     const [locationLabel, periodLabel] = placeandyear
         ? placeandyear.split(/\s[|~]\s/).map((item) => item.trim())
         : ['', ''];
+
+    const galleryImageRefs = useMemo(
+        () => (Array.isArray(imageRefs) ? imageRefs.filter(Boolean) : []),
+        [imageRefs]
+    );
+    const visibleGalleryImageRefs = useMemo(
+        () => galleryImageRefs.slice(0, visibleImageCount),
+        [galleryImageRefs, visibleImageCount]
+    );
+    const hasMoreGalleryImages = visibleImageCount < galleryImageRefs.length;
+
+    useEffect(() => {
+        setVisibleImageCount(GALLERY_BATCH_SIZE);
+    }, [galleryImageRefs]);
 
     const handleImageClick = (imageUrl: string) => {
         setCurrentImage(imageUrl);
@@ -124,7 +141,12 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                                 onClick={() => handleImageClick(mainImage)}
                                 aria-label={t("common.viewImage")}
                             >
-                                <img src={mainImage} alt={`${title} main`} className={prodetailsstyles.heroImage} />
+                                <img
+                                    src={mainImage}
+                                    alt={`${title} main`}
+                                    className={prodetailsstyles.heroImage}
+                                    decoding="async"
+                                />
                                 <span className={prodetailsstyles.blueprintOverlay} aria-hidden="true" />
                             </button>
                         ) : (
@@ -220,22 +242,46 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
                     <section className={prodetailsstyles.mediaSection} aria-label={t("projects.imagesLabel")}>
                         <span className={prodetailsstyles.sectionKicker}>Project Gallery</span>
-                        {Array.isArray(imageRefs) && imageRefs.length > 0 ? (
-                            <div className={imagestyles.detailGalleryGrid}>
-                                {imageRefs.map((imageRef, imgIndex) => {
+                        {galleryImageRefs.length > 0 ? (
+                            <>
+                                <div className={imagestyles.detailGalleryGrid}>
+                                    {visibleGalleryImageRefs.map((imageRef, imgIndex) => {
                                     const imageUrl = resolveUrl(imageRef);
                                     return (
-                                        <div className={imagestyles.detailGalleryItem} key={imgIndex}>
+                                        <div className={imagestyles.detailGalleryItem} key={`${imageRef}-${imgIndex}`}>
                                             <button
+                                                type="button"
                                                 className={imagestyles.imageButton}
                                                 onClick={() => handleImageClick(imageUrl)}
                                             >
-                                                <img src={imageUrl} alt={`${t("common.projectImage")} ${imgIndex + 1}`} className={imagestyles.detailGalleryImage} />
+                                                <img
+                                                    src={imageUrl}
+                                                    alt={`${t("common.projectImage")} ${imgIndex + 1}`}
+                                                    className={imagestyles.detailGalleryImage}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
                                             </button>
                                         </div>
                                     );
                                 })}
-                            </div>
+                                </div>
+                                {hasMoreGalleryImages && (
+                                    <div className={prodetailsstyles.galleryActions}>
+                                        <Button
+                                            type="button"
+                                            variant="outline-secondary"
+                                            onClick={() =>
+                                                setVisibleImageCount((count) =>
+                                                    Math.min(count + GALLERY_BATCH_SIZE, galleryImageRefs.length)
+                                                )
+                                            }
+                                        >
+                                            {t("projects.showMoreImages", "Show More Images")}
+                                        </Button>
+                                    </div>
+                                )}
+                            </>
                         ) : (
                             <div className={prodetailsstyles.emptyGalleryState}>
                                 <iconsfa.FaImages className={prodetailsstyles.emptyGalleryIcon} />
@@ -256,7 +302,12 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                     <Modal.Title>{t("common.imagePreview")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img src={currentImage} alt={t("common.projectImage")} className={imagestyles.modalImage} />
+                    <img
+                        src={currentImage}
+                        alt={t("common.projectImage")}
+                        className={imagestyles.modalImage}
+                        decoding="async"
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>

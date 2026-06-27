@@ -124,9 +124,9 @@ Method:
 
 | Route | FCP | LCP | TBT Approx. | CLS | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `/` | 1,364 ms | 4,364 ms | 1,355 ms | 0.1958 | 106 | 4,731,956 bytes | 74 | 73 | 0 | 0 |
-| `/projects/renovation-and-expansion-of-a-2-story-residence` | 1,536 ms | 2,420 ms | 319 ms | 0.1219 | 31 | 1,173,130 bytes | 17 | 16 | 0 | 0 |
-| `/projects/trainee-program-startme-2021-8th-edition` | 476 ms | 1,560 ms | 354 ms | 0.0986 | 31 | 1,154,854 bytes | 17 | 16 | 0 | 0 |
+| `/` | 1,148 ms | 2,672 ms | 287 ms | 0.8605 | 106 | 11,140,560 bytes | 74 | 73 | 0 | 0 |
+| `/projects/renovation-and-expansion-of-a-2-story-residence` | 772 ms | 1,544 ms | 117 ms | 0.8126 | 31 | 1,171,841 bytes | 17 | 16 | 0 | 0 |
+| `/projects/trainee-program-startme-2021-8th-edition` | 692 ms | 2,084 ms | 402 ms | 0.8126 | 31 | 1,154,883 bytes | 17 | 16 | 0 | 0 |
 
 ### Host Breakdown
 
@@ -158,37 +158,37 @@ Homepage:
 
 | Type | Path | Host | Transfer | Duration |
 | --- | --- | --- | ---: | ---: |
-| Script | `/static/js/main.96d7d1b9.js` | `zepedro-portfolio.hmpedro.com` | 932,521 bytes | 767 ms |
-| Image | `/static/media/bg0.623f559fde2521cca5d6.webp` | `zepedro-portfolio.hmpedro.com` | 809,368 bytes | 908 ms |
-| Other | `/paradoxo.png` | `zepedro-portfolio.hmpedro.com` | 455,958 bytes | 373 ms |
-| Other | `/paradoxo.png` | `zepedro-portfolio.hmpedro.com` | 455,946 bytes | 237 ms |
-| Image | `/m10.jpg` | `dh09x5tu10bt3.cloudfront.net` | 199,990 bytes | 553 ms |
+| Image | `/120-Apart-BZ-01.jpg` | `dh09x5tu10bt3.cloudfront.net` | 3,577,446 bytes | 3,665 ms |
+| Image | `/120-Apart-BZ-02.jpg` | `dh09x5tu10bt3.cloudfront.net` | 1,637,082 bytes | 3,191 ms |
+| Image | `/120-Apart-BZ-04.jpg` | `dh09x5tu10bt3.cloudfront.net` | 1,122,706 bytes | 4,198 ms |
+| Script | `/static/js/main.ab474a8d.js` | `zepedro-portfolio.hmpedro.com` | 934,470 bytes | 763 ms |
+| Image | `/static/media/bg0.623f559fde2521cca5d6.webp` | `zepedro-portfolio.hmpedro.com` | 809,467 bytes | 952 ms |
 
 Renovation project route:
 
 | Type | Path | Host | Transfer | Duration |
 | --- | --- | --- | ---: | ---: |
-| Image | `/cd6.jpg` | `dh09x5tu10bt3.cloudfront.net` | 178,873 bytes | 308 ms |
-| Image | `/cd8.jpg` | `dh09x5tu10bt3.cloudfront.net` | 117,468 bytes | 375 ms |
-| Image | `/cd10.jpg` | `dh09x5tu10bt3.cloudfront.net` | 108,620 bytes | 434 ms |
-| Image | `/cd9.jpg` | `dh09x5tu10bt3.cloudfront.net` | 92,494 bytes | 441 ms |
-| Image | `/cd4.jpg` | `dh09x5tu10bt3.cloudfront.net` | 88,909 bytes | 189 ms |
+| Image | `/cd6.jpg` | `dh09x5tu10bt3.cloudfront.net` | 178,865 bytes | 182 ms |
+| Image | `/cd8.jpg` | `dh09x5tu10bt3.cloudfront.net` | 117,469 bytes | 224 ms |
+| Image | `/cd10.jpg` | `dh09x5tu10bt3.cloudfront.net` | 108,622 bytes | 314 ms |
+| Image | `/cd9.jpg` | `dh09x5tu10bt3.cloudfront.net` | 92,494 bytes | 291 ms |
+| Image | `/cd4.jpg` | `dh09x5tu10bt3.cloudfront.net` | 88,910 bytes | 197 ms |
 
 STARTME project route:
 
 | Type | Path | Host | Transfer | Duration |
 | --- | --- | --- | ---: | ---: |
-| Image | `/st9.jpg` | `dh09x5tu10bt3.cloudfront.net` | 130,725 bytes | 331 ms |
-| Image | `/st7.jpg` | `dh09x5tu10bt3.cloudfront.net` | 107,043 bytes | 98 ms |
-| Image | `/st4.jpg` | `dh09x5tu10bt3.cloudfront.net` | 102,987 bytes | 196 ms |
-| Image | `/st12.jpg` | `dh09x5tu10bt3.cloudfront.net` | 97,674 bytes | 281 ms |
-| Image | `/st8.jpg` | `dh09x5tu10bt3.cloudfront.net` | 76,513 bytes | 153 ms |
+| Image | `/st9.jpg` | `dh09x5tu10bt3.cloudfront.net` | 130,716 bytes | 240 ms |
+| Image | `/st7.jpg` | `dh09x5tu10bt3.cloudfront.net` | 107,045 bytes | 230 ms |
+| Image | `/st4.jpg` | `dh09x5tu10bt3.cloudfront.net` | 102,988 bytes | 202 ms |
+| Image | `/st12.jpg` | `dh09x5tu10bt3.cloudfront.net` | 97,667 bytes | 274 ms |
+| Image | `/st8.jpg` | `dh09x5tu10bt3.cloudfront.net` | 76,515 bytes | 321 ms |
 
 ### Findings
 
 1. CloudFront delivery is active for project media. The measured heavy project routes each made 15 requests to `dh09x5tu10bt3.cloudfront.net`.
-2. Image-heavy project detail pages are currently in the "seconds, not minutes" target range. The measured detail routes transferred about 1.15-1.17 MB and reached LCP between 1.56s and 2.42s.
-3. The homepage is heavier than the detail pages: 4.73 MB transferred, 74 image requests, LCP 4.36s, TBT 1.35s, and CLS 0.1958. This should be treated as a follow-up optimization target.
+2. Image-heavy project detail pages are currently in the "seconds, not minutes" target range. The measured detail routes transferred about 1.15-1.17 MB and reached LCP between 1.54s and 2.08s in the latest run.
+3. The homepage is heavier than the detail pages: 11.14 MB transferred and 74 image requests in the latest run. This should be treated as a follow-up optimization target.
 4. The measured production DOM reported 0 images with `loading="lazy"` and 0 with `decoding="async"` on all measured routes. This suggests the deployed route/component path may not be using the newer lazy/progressive gallery implementation, or those attributes are not present in the production build currently deployed.
 5. The two heavy project routes loaded 15 CloudFront image requests each during the measurement. That means current production behavior is still loading the full measured galleries, not only a first batch of 6 images.
 6. The JavaScript bundle and static visual assets are secondary performance targets. The main script and homepage background are among the largest non-gallery resources.
@@ -201,6 +201,46 @@ STARTME project route:
 - Optimize homepage image strategy separately from project detail pages.
 - Consider code splitting or bundle analysis for the main JavaScript bundle.
 - Reduce CLS on homepage and the renovation detail route by reserving stable image/container dimensions.
+
+## Bridge Verification: Local Build Gallery Hardening
+
+Method:
+
+- Built locally with `npm run build`.
+- Served the production build at `http://localhost:4173`.
+- Re-ran `scripts/measure-production-performance.mjs` with `PERF_BASE_URL=http://localhost:4173` and `PERF_REPORT_LABEL=local-bridge`.
+- Reports:
+  - `docs/performance-reports/local-bridge-performance-summary.json`
+  - `docs/performance-reports/local-bridge-performance-cdp.json`
+
+### Production vs Local Bridge Detail Routes
+
+| Route | Environment | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Renovation detail | Current production | 31 | 1,171,841 bytes | 17 | 16 | 0 | 0 |
+| Renovation detail | Local bridge build | 17 | 249,384 bytes | 6 | 7 | 6 | 7 |
+| STARTME detail | Current production | 31 | 1,154,883 bytes | 17 | 16 | 0 | 0 |
+| STARTME detail | Local bridge build | 20 | 264,186 bytes | 6 | 7 | 6 | 7 |
+
+### UI Verification
+
+Local build verification on `/projects/renovation-and-expansion-of-a-2-story-residence`:
+
+- Initial gallery render: 6 gallery images.
+- Initial gallery lazy images: 6.
+- Initial async images: 7, including the hero image.
+- "Show More Images" button present: yes.
+- After clicking "Show More Images": 12 gallery images, all lazy.
+- Gallery modal preview: opens with 1 image.
+
+### Bridge Result
+
+The bridge hardening validates the intended architecture on the built app:
+
+- The active project detail route now renders only the first gallery batch.
+- Gallery images include `loading="lazy"` and `decoding="async"`.
+- Full gallery rendering is deferred until user action.
+- Existing `imageRefs` / `media.images` compatibility is preserved.
 
 ## Routes to Measure
 
