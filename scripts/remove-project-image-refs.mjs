@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { initializeApp } from "firebase/app";
+import { deleteApp, initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
   collection,
@@ -100,3 +100,4 @@ console.log(
     2
   )
 );
+await deleteApp(app);

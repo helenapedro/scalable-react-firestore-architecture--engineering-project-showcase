@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { initializeApp } from "firebase/app";
+import { deleteApp, initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { writeFileSync } from "node:fs";
 
@@ -58,3 +58,4 @@ const outputPath = process.argv[2] || "projects-export.json";
 writeFileSync(outputPath, JSON.stringify(payload, null, 2), "utf-8");
 
 console.log(`Exported ${projects.length} projects to ${outputPath}`);
+await deleteApp(app);
