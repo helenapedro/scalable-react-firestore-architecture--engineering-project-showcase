@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { deleteDoc, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, deleteField, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import useData from "../../Hooks/useData";
 import db from "../../config/firebase";
 import { getLanguageFromPath } from "../../i18n/routes";
@@ -66,6 +66,32 @@ const parseImageRefs = (value) =>
   value
     .split(/\r?\n/)
     .map(parseImageRefLine)
+    .filter(Boolean);
+
+const serializeActivity = (activity) => {
+  if (!activity) return "";
+  if (typeof activity === "string") return activity;
+  if (typeof activity === "object") return JSON.stringify(activity);
+  return String(activity);
+};
+
+const parseActivityLine = (line) => {
+  const trimmed = line.trim();
+  if (!trimmed) return "";
+  if (!trimmed.startsWith("{")) return trimmed;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : trimmed;
+  } catch (error) {
+    return trimmed;
+  }
+};
+
+const parseActivities = (value) =>
+  value
+    .split(/\r?\n/)
+    .map(parseActivityLine)
     .filter(Boolean);
 
 const s3UploadEndpoint = process.env.REACT_APP_S3_UPLOAD_ENDPOINT || "";
@@ -134,10 +160,17 @@ const makeEditForm = (project) => {
   const locationValue = location?.label || location?.name || project.location;
   const coordinates = project.location?.coordinates || project.coordinates || project.geo || {};
   const modelAsset = project.modelAsset || project.media?.model || project.modelAssets?.[0] || {};
+  const activities =
+    Array.isArray(project.activities) && project.activities.length > 0
+      ? project.activities
+      : [
+          ...(Array.isArray(project.responsibilities) ? project.responsibilities : []),
+          ...(Array.isArray(project.results) ? project.results : []),
+        ];
   const imageRefs =
-    Array.isArray(project.imageRefs) && project.imageRefs.length > 0
-      ? project.imageRefs
-      : project.media?.images || [];
+    Array.isArray(project.media?.images) && project.media.images.length > 0
+      ? project.media.images
+      : project.imageRefs || [];
 
   return {
     projectId: project.id || project.slug || "",
@@ -149,6 +182,7 @@ const makeEditForm = (project) => {
     locationPt: valueForLanguage(locationValue, "pt"),
     contextEn: valueForLanguage(project.context || project.description, "en"),
     contextPt: valueForLanguage(project.context || project.description, "pt"),
+    activities: activities.map(serializeActivity).filter(Boolean).join("\n"),
     outcomeEn: valueForLanguage(project.projectOutcome || project.finalDescription, "en"),
     outcomePt: valueForLanguage(project.projectOutcome || project.finalDescription, "pt"),
     latitude: String(coordinates.lat ?? coordinates.latitude ?? ""),
@@ -174,6 +208,7 @@ const makeCreateForm = () => ({
   locationPt: "",
   contextEn: "",
   contextPt: "",
+  activities: "",
   outcomeEn: "",
   outcomePt: "",
   latitude: "",
@@ -324,6 +359,7 @@ const AdminDashboard = () => {
     const lat = Number(editForm.latitude);
     const lng = Number(editForm.longitude);
     const hasValidCoordinates = Number.isFinite(lat) && Number.isFinite(lng);
+    const activities = parseActivities(editForm.activities);
     const imageRefs = parseImageRefs(editForm.imageRefs);
     const modelAsset = editForm.modelUrl.trim()
       ? {
@@ -342,9 +378,9 @@ const AdminDashboard = () => {
       organization: localizedPair(editForm.organizationEn, editForm.organizationPt),
       location: localizedPair(editForm.locationEn, editForm.locationPt),
       context: localizedPair(editForm.contextEn, editForm.contextPt),
+      activities,
       projectOutcome: localizedPair(editForm.outcomeEn, editForm.outcomePt),
       coordinates: hasValidCoordinates ? { lat, lng } : null,
-      imageRefs,
       media: {
         ...(editingProject.media || {}),
         images: imageRefs,
@@ -356,8 +392,18 @@ const AdminDashboard = () => {
       updatedAt: serverTimestamp(),
     };
 
+    const writePayload =
+      formMode === "create"
+        ? payload
+        : {
+            ...payload,
+            imageRefs: deleteField(),
+            responsibilities: deleteField(),
+            results: deleteField(),
+          };
+
     if (formMode === "create") {
-      payload.createdAt = serverTimestamp();
+      writePayload.createdAt = serverTimestamp();
     }
 
     setSaving(true);
@@ -374,9 +420,9 @@ const AdminDashboard = () => {
       }
 
       if (formMode === "create") {
-        await setDoc(doc(db, "projects", projectId), payload);
+        await setDoc(doc(db, "projects", projectId), writePayload);
       } else {
-        await updateDoc(doc(db, "projects", projectId), payload);
+        await updateDoc(doc(db, "projects", projectId), writePayload);
       }
 
       invalidateCache(createCacheKey("collection", "projects"));
@@ -594,23 +640,28 @@ const AdminDashboard = () => {
                       <input value={editForm.longitude} onChange={(event) => updateForm("longitude", event.target.value)} inputMode="decimal" />
                     </label>
                     <label className={`${styles.field} ${styles.fullWidth}`}>
-                      <span>{t("admin.contextEn")}</span>
+                      <span>{t("admin.projectOverviewEn")}</span>
                       <textarea value={editForm.contextEn} onChange={(event) => updateForm("contextEn", event.target.value)} rows={4} />
                     </label>
                     <label className={`${styles.field} ${styles.fullWidth}`}>
-                      <span>{t("admin.contextPt")}</span>
+                      <span>{t("admin.projectOverviewPt")}</span>
                       <textarea value={editForm.contextPt} onChange={(event) => updateForm("contextPt", event.target.value)} rows={4} />
                     </label>
                     <label className={`${styles.field} ${styles.fullWidth}`}>
-                      <span>{t("admin.outcomeEn")}</span>
+                      <span>{t("admin.technicalScope")}</span>
+                      <textarea value={editForm.activities} onChange={(event) => updateForm("activities", event.target.value)} rows={6} />
+                      <small>{t("admin.technicalScopeHelp")}</small>
+                    </label>
+                    <label className={`${styles.field} ${styles.fullWidth}`}>
+                      <span>{t("admin.roleOutcomeEn")}</span>
                       <textarea value={editForm.outcomeEn} onChange={(event) => updateForm("outcomeEn", event.target.value)} rows={4} />
                     </label>
                     <label className={`${styles.field} ${styles.fullWidth}`}>
-                      <span>{t("admin.outcomePt")}</span>
+                      <span>{t("admin.roleOutcomePt")}</span>
                       <textarea value={editForm.outcomePt} onChange={(event) => updateForm("outcomePt", event.target.value)} rows={4} />
                     </label>
                     <label className={`${styles.field} ${styles.fullWidth}`}>
-                      <span>{t("admin.imageRefs")}</span>
+                      <span>{t("admin.projectGallery")}</span>
                       <textarea value={editForm.imageRefs} onChange={(event) => updateForm("imageRefs", event.target.value)} rows={5} />
                       <small>{t("admin.imageRefsHelp")}</small>
                     </label>

@@ -49,7 +49,7 @@ const ProjectCard: React.FC = () => {
         finalDescription: project.finalDescription || project.projectOutcome || "",
         mainImageUrl: project.mainImageUrl || "",
         mainImageRef: project.media?.mainImage || null,
-        imageRefs: project.imageRefs || project.media?.images || [],
+        imageRefs: project.imageRefs || [],
         mediaImages: project.media?.images || [],
         modelAsset: project.modelAsset || project.media?.model || project.modelAssets?.[0] || null,
       }

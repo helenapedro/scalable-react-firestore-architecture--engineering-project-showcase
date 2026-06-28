@@ -52,19 +52,24 @@ Current frontend behavior:
 - Gallery images use `decoding="async"`.
 - The active TypeScript project detail route normalizes both legacy string image references and structured media objects.
 - The active JavaScript gallery path also supports legacy string image references and structured media objects.
-- `imageRefs` remains the first supported source when present; `media.images` is used as the backward-compatible fallback.
+- `media.images` is the canonical project gallery source; `imageRefs` is supported only as a legacy read fallback.
 - Structured media objects can provide `thumbUrl`, `thumbnailUrl`, `largeUrl`, `originalUrl`, `alt`, `width`, and `height`.
 - The gallery can render a lighter display reference while preserving the original/full reference for modal preview.
 
 Current admin/upload behavior:
 
 - Admin selects one or more images.
+- Admin edits the same content groups rendered on project detail pages:
+  - `context`: Project Overview.
+  - `activities`: Technical Scope & Responsibilities.
+  - `projectOutcome`: Role & Outcome.
+  - `media.images`: Project Gallery.
 - Browser asks `REACT_APP_S3_UPLOAD_ENDPOINT` for upload URLs.
 - Request includes Firebase ID token.
 - Serverless handler verifies admin authorization.
 - Handler returns temporary S3 upload URLs and public URLs.
 - Uploaded URLs are appended to project image references.
-- Admin saves keep `imageRefs` and `media.images` aligned for backward compatibility.
+- Admin saves only write `media.images`; legacy `imageRefs` is removed on edit.
 - The admin image textarea accepts one image path, URL, or structured media JSON object per line.
 
 Current production observations from the initial baseline pass:
@@ -126,13 +131,10 @@ This can be introduced later without breaking the current URL model.
 
 ### Current Compatible Model
 
-The application currently supports simple image references:
+The application currently stores project gallery references under `media.images`:
 
 ```json
 {
-  "imageRefs": [
-    "https://cdn.example.com/projects/project-id/images/photo.jpg"
-  ],
   "media": {
     "images": [
       "https://cdn.example.com/projects/project-id/images/photo.jpg"
@@ -141,7 +143,7 @@ The application currently supports simple image references:
 }
 ```
 
-This is simple and backward compatible, but it does not carry image dimensions, alt text, derivatives, or ordering metadata beyond array position.
+This is simple, but it does not carry image dimensions, alt text, derivatives, or ordering metadata beyond array position. Legacy `imageRefs` can still be read by the frontend during migration, but it should not be written by the admin UI.
 
 ### Supported Media Object Model
 
@@ -295,7 +297,7 @@ The presign handler validates:
 
 ### Phase 1: Keep Existing Strings
 
-- Continue supporting `imageRefs` and `media.images` string arrays.
+- Continue reading legacy `imageRefs` while making `media.images` canonical.
 - Normalize URL resolution.
 - Document CDN and upload rules.
 
@@ -306,6 +308,8 @@ The presign handler validates:
 - Add `thumbUrl`, `alt`, `width`, and `height` support. Completed in runtime rendering; Firestore backfill remains optional.
 - Keep admin UI backward compatible.
 - Use `scripts/backfill-project-media-schema.mjs` to dry-run or backfill `imageRefs` from existing `media.images` values.
+- Use `scripts/migrate-project-detail-schema.mjs` to migrate legacy `responsibilities` / `results` into `activities`.
+- Use `scripts/remove-project-image-refs.mjs` to remove duplicated legacy `imageRefs` after `media.images` is confirmed.
 
 Backfill dry-run:
 
@@ -319,6 +323,34 @@ Backfill write mode requires an authenticated Firebase admin user:
 $env:FIREBASE_ADMIN_EMAIL="admin@example.com"
 $env:FIREBASE_ADMIN_PASSWORD="..."
 node scripts\backfill-project-media-schema.mjs --write
+```
+
+Project detail schema migration:
+
+```powershell
+node scripts\migrate-project-detail-schema.mjs
+```
+
+Apply writes only from an authenticated admin context:
+
+```powershell
+$env:FIREBASE_ADMIN_EMAIL="admin@example.com"
+$env:FIREBASE_ADMIN_PASSWORD="..."
+node scripts\migrate-project-detail-schema.mjs --write
+```
+
+Remove duplicated legacy image references:
+
+```powershell
+node scripts\remove-project-image-refs.mjs
+```
+
+Apply writes only after dry-run shows `unsafe: []`:
+
+```powershell
+$env:FIREBASE_ADMIN_EMAIL="admin@example.com"
+$env:FIREBASE_ADMIN_PASSWORD="..."
+node scripts\remove-project-image-refs.mjs --write
 ```
 
 ### Phase 3: Generate Derivatives
@@ -345,4 +377,4 @@ node scripts\backfill-project-media-schema.mjs --write
 - [ ] AWS credentials are not exposed to the frontend.
 - [ ] Upload validation enforces type and size limits.
 - [ ] Cache headers are long-lived for immutable media.
-- [x] The system remains backward compatible with existing `imageRefs`.
+- [x] The system reads legacy `imageRefs` but stores canonical gallery data in `media.images`.

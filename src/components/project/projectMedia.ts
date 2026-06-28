@@ -33,8 +33,8 @@ const getDisplayRef = (image: ProjectImageAsset, fullRef: string) =>
   image.thumbUrl || image.thumbnailUrl || image.largeUrl || fullRef;
 
 const getActiveImages = (imageRefs: ProjectImageRef[] = [], mediaImages: ProjectImageRef[] = []) => {
-  if (Array.isArray(imageRefs) && imageRefs.length > 0) return imageRefs;
   if (Array.isArray(mediaImages) && mediaImages.length > 0) return mediaImages;
+  if (Array.isArray(imageRefs) && imageRefs.length > 0) return imageRefs;
   return [];
 };
 

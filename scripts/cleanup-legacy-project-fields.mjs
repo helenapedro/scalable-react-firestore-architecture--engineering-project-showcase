@@ -38,12 +38,12 @@ const firebaseConfig = {
 
 const LEGACY_FIELDS = [
   "description",
-  "activities",
   "finalDescription",
   "placeandyear",
   "mainImageUrl",
-  "imageRefs",
   "imageThumbRefs",
+  "responsibilities",
+  "results",
 ];
 
 const BATCH_LIMIT = 450;
@@ -61,6 +61,7 @@ const chunk = (array, size) => {
 
 const hasNewSchema = (data) =>
   typeof data.context === "string" ||
+  Array.isArray(data.activities) ||
   Array.isArray(data.responsibilities) ||
   Array.isArray(data.results) ||
   typeof data.projectOutcome === "string" ||
