@@ -12,6 +12,7 @@ import cardstyles from "../../components/ui/card.module.css";
 import ProjectMetrics from "./ProjectMetrics";
 import ProjectTextSection from "./ProjectTextSection";
 import ProjectMediaGallery from "./ProjectMediaGallery";
+import { resolveAssetUrl } from "../../utils/assetUrl";
 import {
   buildImageItems,
   buildProjectStats,
@@ -32,10 +33,7 @@ const ProjectDetails = ({
   const [currentImage, setCurrentImage] = useState("");
   const placeAndPeriod = [location, period?.label].filter(Boolean).join(" ~ ");
 
-  const resolveUrl = (url) => {
-    const baseUrl = process.env.REACT_APP_CDN_BASE_URL;
-    return url.startsWith("http") ? url : `${baseUrl}${url}`;
-  };
+  const resolveUrl = resolveAssetUrl;
 
   const stats = useMemo(
     () =>

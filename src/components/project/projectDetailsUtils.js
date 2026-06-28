@@ -138,17 +138,54 @@ export const buildProjectStats = ({
   return extracted.slice(0, 5);
 };
 
+const isImageObject = (imageRef) =>
+  imageRef && typeof imageRef === "object" && !Array.isArray(imageRef);
+
+const getFullImageRef = (imageRef) => {
+  if (typeof imageRef === "string") return imageRef;
+  if (!isImageObject(imageRef)) return "";
+  return (
+    imageRef.originalUrl ||
+    imageRef.url ||
+    imageRef.fullUrl ||
+    imageRef.src ||
+    imageRef.largeUrl ||
+    imageRef.thumbUrl ||
+    imageRef.thumbnailUrl ||
+    ""
+  );
+};
+
+const getDisplayImageRef = (imageRef, fullRef) => {
+  if (!isImageObject(imageRef)) return fullRef;
+  return imageRef.thumbUrl || imageRef.thumbnailUrl || imageRef.largeUrl || fullRef;
+};
+
+const getLocalizedAlt = (alt) => {
+  if (!alt) return "";
+  if (typeof alt === "string") return alt;
+  if (typeof alt === "object") return alt.en || alt.pt || "";
+  return "";
+};
+
 export const buildImageItems = ({
   imageRefs = [],
   imageThumbRefs = [],
   resolveUrl,
 }) => {
   if (!Array.isArray(imageRefs)) return [];
-  return imageRefs.map((full, index) => {
-    const thumb = Array.isArray(imageThumbRefs) ? imageThumbRefs[index] : null;
+  return imageRefs.map((imageRef, index) => {
+    const full = getFullImageRef(imageRef);
+    if (!full) return null;
+    const thumb = Array.isArray(imageThumbRefs)
+      ? imageThumbRefs[index]
+      : getDisplayImageRef(imageRef, full);
     return {
+      alt: getLocalizedAlt(imageRef?.alt) || `Project ${index + 1}`,
       full: resolveUrl(full),
       thumb: thumb ? resolveUrl(thumb) : resolveUrl(full),
+      width: imageRef?.width,
+      height: imageRef?.height,
     };
-  });
+  }).filter(Boolean);
 };

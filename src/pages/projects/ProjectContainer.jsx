@@ -15,6 +15,7 @@ import mainStyles from "../../components/Main.module.css";
 import containerstyles from "../../components/ui/Container.module.css";
 import { getLanguageFromPath, routePath } from "../../i18n/routes";
 import { localizeCategory, localizeOwner, localizeProject } from "../../i18n/localizedValue";
+import { resolveAssetUrl } from "../../utils/assetUrl";
 
 const FEATURED_PROJECT_TITLE = "Construction of 120 Social Apartments in Buco-Zau";
 const FEATURED_VIDEO_URL = "https://www.tiktok.com/@tpaonline/video/7607846826837953800";
@@ -69,10 +70,7 @@ const ProjectsContainer = () => {
   );
 
   const openModal = (image) => {
-    const imageUrl = image.startsWith("http")
-      ? image
-      : `${process.env.REACT_APP_BASE_URL}${image}`;
-    setModalImage(imageUrl);
+    setModalImage(resolveAssetUrl(image));
     setShowModal(true);
   };
 

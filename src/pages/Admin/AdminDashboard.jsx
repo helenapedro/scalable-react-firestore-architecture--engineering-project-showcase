@@ -42,10 +42,30 @@ const slugify = (value) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const textToList = (value) =>
+const serializeImageRef = (imageRef) => {
+  if (!imageRef) return "";
+  if (typeof imageRef === "string") return imageRef;
+  if (typeof imageRef === "object") return JSON.stringify(imageRef);
+  return String(imageRef);
+};
+
+const parseImageRefLine = (line) => {
+  const trimmed = line.trim();
+  if (!trimmed) return "";
+  if (!trimmed.startsWith("{")) return trimmed;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : trimmed;
+  } catch (error) {
+    return trimmed;
+  }
+};
+
+const parseImageRefs = (value) =>
   value
     .split(/\r?\n/)
-    .map((item) => item.trim())
+    .map(parseImageRefLine)
     .filter(Boolean);
 
 const s3UploadEndpoint = process.env.REACT_APP_S3_UPLOAD_ENDPOINT || "";
@@ -114,7 +134,10 @@ const makeEditForm = (project) => {
   const locationValue = location?.label || location?.name || project.location;
   const coordinates = project.location?.coordinates || project.coordinates || project.geo || {};
   const modelAsset = project.modelAsset || project.media?.model || project.modelAssets?.[0] || {};
-  const imageRefs = project.imageRefs || project.media?.images || [];
+  const imageRefs =
+    Array.isArray(project.imageRefs) && project.imageRefs.length > 0
+      ? project.imageRefs
+      : project.media?.images || [];
 
   return {
     projectId: project.id || project.slug || "",
@@ -130,7 +153,7 @@ const makeEditForm = (project) => {
     outcomePt: valueForLanguage(project.projectOutcome || project.finalDescription, "pt"),
     latitude: String(coordinates.lat ?? coordinates.latitude ?? ""),
     longitude: String(coordinates.lng ?? coordinates.lon ?? coordinates.longitude ?? ""),
-    imageRefs: Array.isArray(imageRefs) ? imageRefs.join("\n") : "",
+    imageRefs: Array.isArray(imageRefs) ? imageRefs.map(serializeImageRef).filter(Boolean).join("\n") : "",
     modelUrl: modelAsset.url || "",
     modelTitle: modelAsset.title || "",
     modelFormat: modelAsset.format || "",
@@ -283,8 +306,8 @@ const AdminDashboard = () => {
         if (url) uploadedUrls.push(url);
       }
 
-      const existingRefs = textToList(editForm.imageRefs);
-      updateForm("imageRefs", [...existingRefs, ...uploadedUrls].join("\n"));
+      const existingRefs = parseImageRefs(editForm.imageRefs);
+      updateForm("imageRefs", [...existingRefs, ...uploadedUrls].map(serializeImageRef).filter(Boolean).join("\n"));
       setSelectedFiles([]);
       setSaveMessage(t("admin.uploadComplete", { count: uploadedUrls.length }));
     } catch (error) {
@@ -301,7 +324,7 @@ const AdminDashboard = () => {
     const lat = Number(editForm.latitude);
     const lng = Number(editForm.longitude);
     const hasValidCoordinates = Number.isFinite(lat) && Number.isFinite(lng);
-    const imageRefs = textToList(editForm.imageRefs);
+    const imageRefs = parseImageRefs(editForm.imageRefs);
     const modelAsset = editForm.modelUrl.trim()
       ? {
           url: editForm.modelUrl.trim(),
@@ -325,6 +348,7 @@ const AdminDashboard = () => {
       media: {
         ...(editingProject.media || {}),
         images: imageRefs,
+        mainImage: editingProject.media?.mainImage || imageRefs[0] || null,
         model: modelAsset,
       },
       modelAsset,

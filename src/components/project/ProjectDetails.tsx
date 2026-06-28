@@ -10,6 +10,7 @@ import imagestyles from '../../components/ui/Image.module.css';
 import prodetailsstyles from '../../components/ui/ProjectDetails.module.css';
 import containerstyles from '../../components/ui/Container.module.css';
 import cardstyles from '../../components/ui/card.module.css';
+import { resolveAssetUrl } from '../../utils/assetUrl';
 import BimModelViewer, { type BimModelAsset } from './BimModelViewer';
 import type { ProjectImageRef } from '../../types';
 import { getProjectImageFullRef, normalizeProjectImages } from './projectMedia';
@@ -94,20 +95,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         setCurrentImage('');
     };
 
-    const resolveUrl = (imageRef: string) => {
-        if (!imageRef) return '';
-        if (/^https?:\/\//i.test(imageRef)) return imageRef;
-
-        const cdnBaseUrl =
-            process.env.REACT_APP_CDN_BASE_URL ||
-            process.env.REACT_APP_BASE_URL ||
-            process.env.REACT_APP_FIREBASE_STORAGE_BASE_URL;
-
-        if (!cdnBaseUrl) return imageRef;
-
-        const normalizedBase = cdnBaseUrl.endsWith('/') ? cdnBaseUrl : `${cdnBaseUrl}/`;
-        return `${normalizedBase}${imageRef.replace(/^\/+/, '')}`;
-    };
+    const resolveUrl = resolveAssetUrl;
 
     const mainImage = resolveUrl(mainImageUrl || getProjectImageFullRef(mainImageRef) || galleryImages[0]?.fullRef || '');
 

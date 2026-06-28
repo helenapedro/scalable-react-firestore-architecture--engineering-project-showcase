@@ -35,3 +35,4 @@ yarn-error.log*
 
 # local collaboration notes
 /docs/codex-progress.local.md
+/docs/*.local.json

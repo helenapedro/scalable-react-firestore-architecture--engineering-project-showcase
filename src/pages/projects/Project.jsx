@@ -5,6 +5,7 @@ import { FaBuilding, FaMapMarkerAlt } from 'react-icons/fa';
 import { wrapNumbersWithClass } from '../../utils/WrapNumbers';
 import styles from './Project.module.css';
 import imagestyles from '../../components/ui/Image.module.css';
+import { resolveAssetUrl } from '../../utils/assetUrl';
 
 const Project = ({
   title,
@@ -33,10 +34,7 @@ const Project = ({
   };
 
 
-  const resolveUrl = (url) => {
-    const baseUrl = process.env.REACT_APP_CDN_BASE_URL;
-    return url.startsWith('http') ? url : `${baseUrl}${url}`;
-  };
+  const resolveUrl = resolveAssetUrl;
 
   return (
     <div className={styles.project}>

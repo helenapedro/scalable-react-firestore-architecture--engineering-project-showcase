@@ -37,6 +37,7 @@ Relevant files:
 - `src/components/project/ProjectDetails.jsx`
 - `src/components/project/ProjectMediaGallery.jsx`
 - `src/components/project/projectDetailsUtils.js`
+- `src/utils/assetUrl.js`
 - `src/pages/Admin/AdminDashboard.jsx`
 - `serverless/s3-presign/handler.mjs`
 
@@ -44,11 +45,13 @@ Current frontend behavior:
 
 - Image references may be absolute URLs or relative paths.
 - Relative paths are resolved with `REACT_APP_CDN_BASE_URL`.
+- URL resolution strips duplicate slashes between the configured CDN base URL and the stored image path.
 - Gallery rendering starts with `IMAGE_BATCH_SIZE = 6`.
 - Additional images render through "Show More Images".
 - Gallery images use `loading="lazy"`.
 - Gallery images use `decoding="async"`.
 - The active TypeScript project detail route normalizes both legacy string image references and structured media objects.
+- The active JavaScript gallery path also supports legacy string image references and structured media objects.
 - `imageRefs` remains the first supported source when present; `media.images` is used as the backward-compatible fallback.
 - Structured media objects can provide `thumbUrl`, `thumbnailUrl`, `largeUrl`, `originalUrl`, `alt`, `width`, and `height`.
 - The gallery can render a lighter display reference while preserving the original/full reference for modal preview.
@@ -61,6 +64,8 @@ Current admin/upload behavior:
 - Serverless handler verifies admin authorization.
 - Handler returns temporary S3 upload URLs and public URLs.
 - Uploaded URLs are appended to project image references.
+- Admin saves keep `imageRefs` and `media.images` aligned for backward compatibility.
+- The admin image textarea accepts one image path, URL, or structured media JSON object per line.
 
 Current production observations from the initial baseline pass:
 
@@ -199,6 +204,7 @@ Benefits:
 - allows CDN domain changes without rewriting Firestore documents
 - keeps metadata portable between staging and production
 - avoids mixing environment-specific hostnames in content records
+- avoids broken asset requests by joining base URL and stored path with normalized slashes
 
 ### Accepted Exception
 
@@ -295,10 +301,25 @@ The presign handler validates:
 
 ### Phase 2: Add Optional Structured Objects
 
-- Allow `media.images` to contain objects. Completed in the active TypeScript detail route.
+- Allow `media.images` to contain objects. Completed in the active TypeScript detail route and active JavaScript gallery path.
 - Map string values into object-like runtime records. Completed in `src/components/project/projectMedia.ts`.
 - Add `thumbUrl`, `alt`, `width`, and `height` support. Completed in runtime rendering; Firestore backfill remains optional.
 - Keep admin UI backward compatible.
+- Use `scripts/backfill-project-media-schema.mjs` to dry-run or backfill `imageRefs` from existing `media.images` values.
+
+Backfill dry-run:
+
+```powershell
+node scripts\backfill-project-media-schema.mjs
+```
+
+Backfill write mode requires an authenticated Firebase admin user:
+
+```powershell
+$env:FIREBASE_ADMIN_EMAIL="admin@example.com"
+$env:FIREBASE_ADMIN_PASSWORD="..."
+node scripts\backfill-project-media-schema.mjs --write
+```
 
 ### Phase 3: Generate Derivatives
 

@@ -30,10 +30,12 @@ const ProjectMediaGallery = ({ imageItems, onImageClick }) => {
             <button className={imagestyles.imageButton} onClick={() => onImageClick(image.full)}>
               <img
                 src={image.thumb}
-                alt={`Project ${imgIndex + 1}`}
+                alt={image.alt || `Project ${imgIndex + 1}`}
                 className={imagestyles.image}
                 loading="lazy"
                 decoding="async"
+                width={image.width}
+                height={image.height}
               />
             </button>
           </div>
@@ -59,6 +61,9 @@ ProjectMediaGallery.propTypes = {
     PropTypes.shape({
       full: PropTypes.string.isRequired,
       thumb: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+      width: PropTypes.number,
+      height: PropTypes.number,
     })
   ).isRequired,
   onImageClick: PropTypes.func.isRequired,

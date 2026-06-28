@@ -3,9 +3,12 @@ import { Carousel } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import imagestyles from '../../components/ui/Image.module.css';
+import { resolveAssetUrl } from '../../utils/assetUrl';
+import type { ProjectImageRef } from '../../types';
+import { getProjectImageFullRef } from './projectMedia';
 
 interface ProjectCarouselProps {
-     images: string[];
+     images: ProjectImageRef[];
      title: string;
      onImageClick: (image: string) => void;
 }
@@ -36,23 +39,27 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ images, title, onImag
                     }
                     className={imagestyles.imageCarousel}
                >
-                    {images.map((image, index) => (
-                         <Carousel.Item key={index}>
+                    {images.map((image, index) => {
+                         const imageRef = getProjectImageFullRef(image);
+                         const imageUrl = resolveAssetUrl(imageRef);
+                         return (
+                         <Carousel.Item key={`${imageRef}-${index}`}>
                               <div
                                    className={imagestyles.imageWrapper}
                                    onMouseEnter={() => setHovered(index)}
                                    onMouseLeave={() => setHovered(null)}
-                                   onClick={() => onImageClick(image)}
+                                   onClick={() => onImageClick(imageRef)}
                               >
                                    <img
-                                        src={image.startsWith('http') ? image : `${process.env.REACT_APP_BASE_URL}${image}`}
+                                        src={imageUrl}
                                         alt={`${title} ${index + 1}`}
                                         className={imagestyles.imageContainer}
                                    />
                                    {hovered === index && <div className={imagestyles.viewImageOverlay}>{t("common.viewImage")}</div>}
                               </div>
                          </Carousel.Item>
-                    ))}
+                         );
+                    })}
                </Carousel>
 
                <div className={imagestyles.slideCounter}>
