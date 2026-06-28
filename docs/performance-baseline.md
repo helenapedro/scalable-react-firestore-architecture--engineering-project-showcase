@@ -394,6 +394,34 @@ Method:
 - Project detail route gallery behavior remained unchanged in the local verification: 6 lazy gallery images and 7 async rendered images on the renovation route.
 - Hostinger was not deployed during this verification; production still requires a manual upload/deploy when ready.
 
+## Production Verification After Homepage Optimization
+
+Method:
+
+- Manually deployed the homepage optimization build to Hostinger.
+- Confirmed production now serves:
+  - `main.js`: `/static/js/main.8c4342f7.js`
+  - `main.css`: `/static/css/main.8901ab34.css`
+- Re-ran `scripts/measure-production-performance.mjs` with `PERF_REPORT_LABEL=production-after-homepage-optimization`.
+- Reports:
+  - `docs/performance-reports/production-after-homepage-optimization-performance-summary.json`
+  - `docs/performance-reports/production-after-homepage-optimization-performance-cdp.json`
+
+### Production Homepage Before vs After
+
+| State | FCP | LCP | TBT Approx. | CLS | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Before homepage work | 2,428 ms | 4,964 ms | 1,008 ms | 0.8578 | 106 | 11,046,050 bytes | 74 | 73 | 0 | 0 |
+| After manual deploy | 1,104 ms | 3,424 ms | 572 ms | 0.0005 | 34 | 2,889,772 bytes | 2 | 9 | 8 | 9 |
+
+### Production Homepage Result
+
+- Homepage transferred bytes dropped by about 74%.
+- Homepage image requests dropped by about 97%.
+- Homepage CLS moved from poor (`0.8578`) to stable (`0.0005`) in the measured production run.
+- Homepage now matches the local optimized behavior: one preview image per project card, no homepage project carousels, and lazy/async image attributes.
+- Project detail routes preserved the existing gallery behavior after the homepage deploy.
+
 ## Routes to Measure
 
 Use one homepage route, one listing route, and at least two image-heavy project detail routes.

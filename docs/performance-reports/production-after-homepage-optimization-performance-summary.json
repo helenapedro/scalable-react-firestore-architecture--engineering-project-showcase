@@ -1,0 +1,63 @@
+[
+  {
+    "url": "https://zepedro-portfolio.hmpedro.com/",
+    "title": "ZePedro | Jose Pedro - Construction Engineer Portfolio",
+    "fcpMs": 1104,
+    "lcpMs": 3424,
+    "tbtApproxMs": 572,
+    "cls": 0.0005,
+    "requestCount": 34,
+    "transferSizeBytes": 2889772,
+    "imageRequests": 2,
+    "domImageCount": 9,
+    "lazyDomImages": 8,
+    "asyncDomImages": 9,
+    "topHosts": {
+      "zepedro-portfolio.hmpedro.com": 9,
+      "fonts.googleapis.com": 1,
+      "firestore.googleapis.com": 22,
+      "drive.google.com": 1,
+      "dh09x5tu10bt3.cloudfront.net": 1
+    }
+  },
+  {
+    "url": "https://zepedro-portfolio.hmpedro.com/projects/renovation-and-expansion-of-a-2-story-residence",
+    "title": "ZePedro | Jose Pedro - Construction Engineer Portfolio",
+    "fcpMs": 684,
+    "lcpMs": 1508,
+    "tbtApproxMs": 175,
+    "cls": 0.8131,
+    "requestCount": 20,
+    "transferSizeBytes": 250606,
+    "imageRequests": 6,
+    "domImageCount": 7,
+    "lazyDomImages": 6,
+    "asyncDomImages": 7,
+    "topHosts": {
+      "zepedro-portfolio.hmpedro.com": 9,
+      "fonts.googleapis.com": 1,
+      "firestore.googleapis.com": 6,
+      "dh09x5tu10bt3.cloudfront.net": 4
+    }
+  },
+  {
+    "url": "https://zepedro-portfolio.hmpedro.com/projects/trainee-program-startme-2021-8th-edition",
+    "title": "ZePedro | Jose Pedro - Construction Engineer Portfolio",
+    "fcpMs": 384,
+    "lcpMs": 1484,
+    "tbtApproxMs": 257,
+    "cls": 0.8131,
+    "requestCount": 15,
+    "transferSizeBytes": 142238,
+    "imageRequests": 4,
+    "domImageCount": 7,
+    "lazyDomImages": 6,
+    "asyncDomImages": 7,
+    "topHosts": {
+      "zepedro-portfolio.hmpedro.com": 9,
+      "fonts.googleapis.com": 1,
+      "firestore.googleapis.com": 3,
+      "dh09x5tu10bt3.cloudfront.net": 2
+    }
+  }
+]
