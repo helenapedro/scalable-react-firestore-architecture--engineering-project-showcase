@@ -321,6 +321,45 @@ The automated production deploy now matches the expected project detail behavior
 - CLS remains high across measured routes and should be treated as a separate layout stability task.
 - Detail-route transfer sizes in this specific CDP run were not used as a primary comparison signal because the reported values were lower than expected for image bytes. Image request count and DOM/lazy/async attributes are the reliable validation signals for this Priority 2 check.
 
+## Production Verification After Schema Cleanup: 2026-06-28
+
+Method:
+
+- Removed duplicate legacy gallery data from Firestore after confirming `media.images` existed.
+- Confirmed Firestore canonical project detail fields:
+  - `context`: Project Overview
+  - `activities`: Technical Scope & Responsibilities
+  - `projectOutcome`: Role & Outcome
+  - `media.images`: Project Gallery
+- Confirmed Firestore no longer stores duplicated legacy fields in current project documents:
+  - `imageRefs`: 0 projects
+  - `responsibilities`: 0 projects
+  - `results`: 0 projects
+- Confirmed automated deployment completed successfully on run `28310331301`.
+- Confirmed production now serves:
+  - `main.js`: `/static/js/main.332dd971.js`
+  - `main.css`: `/static/css/main.ca2b9470.css`
+- Re-ran `scripts/measure-production-performance.mjs` with `PERF_REPORT_LABEL=production-after-schema-cleanup`.
+- Reports:
+  - `docs/performance-reports/production-after-schema-cleanup-performance-summary.json`
+  - `docs/performance-reports/production-after-schema-cleanup-performance-cdp.json`
+
+### Production After Schema Cleanup
+
+| Route | FCP | LCP | TBT Approx. | CLS | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `/` | 2,428 ms | 4,964 ms | 1,008 ms | 0.8578 | 106 | 11,046,050 bytes | 74 | 73 | 0 | 0 |
+| `/projects/renovation-and-expansion-of-a-2-story-residence` | 2,028 ms | 4,976 ms | 1,060 ms | 0.8131 | 20 | 250,349 bytes | 6 | 7 | 6 | 7 |
+| `/projects/trainee-program-startme-2021-8th-edition` | 3,652 ms | 5,288 ms | 628 ms | 0.8131 | 18 | 143,641 bytes | 4 | 7 | 6 | 7 |
+
+### Schema Cleanup Result
+
+- Project detail routes still render through canonical `media.images` after removing duplicated `imageRefs` from Firestore.
+- Admin now writes canonical project fields and removes legacy fields on edit.
+- Project detail routes preserve the first-batch gallery behavior: 6 lazy gallery images and 7 async rendered images.
+- CloudFront delivery remains active through `dh09x5tu10bt3.cloudfront.net`.
+- Homepage remains out of scope for this cleanup and still needs a separate image-loading pass.
+
 ## Routes to Measure
 
 Use one homepage route, one listing route, and at least two image-heavy project detail routes.
