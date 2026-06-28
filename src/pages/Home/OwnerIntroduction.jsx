@@ -32,6 +32,9 @@ const OwnerIntroduction = ({ ownerData }) => {
                 src={ownerData.mainImage}
                 alt={ownerName}
                 className={imagestyles.heroImage}
+                width="180"
+                height="180"
+                decoding="async"
               />
             )}
             <Card.Title as="h2" className={`${herostyles.fullName} ${styles.name} fw-bold`}>

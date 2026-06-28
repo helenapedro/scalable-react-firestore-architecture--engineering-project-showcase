@@ -20,11 +20,41 @@ import { resolveAssetUrl } from "../../utils/assetUrl";
 const FEATURED_PROJECT_TITLE = "Construction of 120 Social Apartments in Buco-Zau";
 const FEATURED_VIDEO_URL = "https://www.tiktok.com/@tpaonline/video/7607846826837953800";
 const FEATURED_VIDEO_EMBED_URL = "https://drive.google.com/file/d/13DcdDBES0ICsrer3pWLAh4SfFrkg36uF/preview#t=58";
+const HOMEPAGE_PAGE_SIZE = 8;
 
 const getCategoryName = (categories, categoryId) => {
   const category = categories.find((item) => item.id === categoryId);
   return category ? category.name : "Unknown Category";
 };
+
+const HomepageLoadingState = ({ label }) => (
+  <div className={`${mainStyles.panel} ${styles.panel}`} aria-busy="true" aria-label={label}>
+    <div className={`${containerstyles.container} ${styles.homeLoadingIntro}`}>
+      <div className={styles.homeLoadingAvatar} />
+      <div className={styles.homeLoadingCopy}>
+        <span />
+        <span />
+        <span />
+      </div>
+    </div>
+    <div className={`${containerstyles.container} ${styles.homeLoadingFeature}`} />
+    <Row className={containerstyles.container}>
+      {Array.from({ length: HOMEPAGE_PAGE_SIZE }).map((_, index) => (
+        <div className="col-md-6" key={`homepage-loading-card-${index}`}>
+          <div className={styles.homeLoadingCard}>
+            <div className={styles.homeLoadingCardHeader}>
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className={styles.homeLoadingCardImage} />
+            <div className={styles.homeLoadingCardAction} />
+          </div>
+        </div>
+      ))}
+    </Row>
+  </div>
+);
 
 const ProjectsContainer = () => {
   const { t } = useTranslation();
@@ -39,7 +69,7 @@ const ProjectsContainer = () => {
     selectedCategories,
     handlePageChange,
     handleCategoryChange,
-  } = useProjectsServer({ pageSize: 8 });
+  } = useProjectsServer({ pageSize: HOMEPAGE_PAGE_SIZE });
   const { data: categories, loading: categoriesLoading, error: categoriesError } = useData(
     "category"
   );
@@ -74,7 +104,9 @@ const ProjectsContainer = () => {
     setShowModal(true);
   };
 
-  if (projectsLoading || categoriesLoading || ownerLoading) return <p>{t("common.loading")}</p>;
+  if (projectsLoading || categoriesLoading || ownerLoading) {
+    return <HomepageLoadingState label={t("common.loading")} />;
+  }
   if (projectsError) return <p>{t("common.error")}: {projectsError.message}</p>;
   if (categoriesError) return <p>{t("common.error")}: {categoriesError.message}</p>;
   if (ownerError) return <p>{t("common.error")}: {ownerError.message}</p>;

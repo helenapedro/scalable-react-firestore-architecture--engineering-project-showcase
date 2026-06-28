@@ -1,0 +1,63 @@
+[
+  {
+    "url": "http://localhost:4173/",
+    "title": "ZePedro | Jose Pedro - Construction Engineer Portfolio",
+    "fcpMs": 552,
+    "lcpMs": 4800,
+    "tbtApproxMs": 1692,
+    "cls": 0.8119,
+    "requestCount": 34,
+    "transferSizeBytes": 2993739,
+    "imageRequests": 2,
+    "domImageCount": 9,
+    "lazyDomImages": 8,
+    "asyncDomImages": 9,
+    "topHosts": {
+      "localhost:4173": 9,
+      "fonts.googleapis.com": 1,
+      "firestore.googleapis.com": 22,
+      "drive.google.com": 1,
+      "dh09x5tu10bt3.cloudfront.net": 1
+    }
+  },
+  {
+    "url": "http://localhost:4173/projects/renovation-and-expansion-of-a-2-story-residence",
+    "title": "ZePedro | Jose Pedro - Construction Engineer Portfolio",
+    "fcpMs": 588,
+    "lcpMs": 2560,
+    "tbtApproxMs": 384,
+    "cls": 0.8131,
+    "requestCount": 20,
+    "transferSizeBytes": 250789,
+    "imageRequests": 6,
+    "domImageCount": 7,
+    "lazyDomImages": 6,
+    "asyncDomImages": 7,
+    "topHosts": {
+      "localhost:4173": 9,
+      "fonts.googleapis.com": 1,
+      "firestore.googleapis.com": 6,
+      "dh09x5tu10bt3.cloudfront.net": 4
+    }
+  },
+  {
+    "url": "http://localhost:4173/projects/trainee-program-startme-2021-8th-edition",
+    "title": "ZePedro | Jose Pedro - Construction Engineer Portfolio",
+    "fcpMs": 580,
+    "lcpMs": 1916,
+    "tbtApproxMs": 433,
+    "cls": 0.8131,
+    "requestCount": 15,
+    "transferSizeBytes": 142573,
+    "imageRequests": 4,
+    "domImageCount": 7,
+    "lazyDomImages": 6,
+    "asyncDomImages": 7,
+    "topHosts": {
+      "localhost:4173": 9,
+      "fonts.googleapis.com": 1,
+      "firestore.googleapis.com": 3,
+      "dh09x5tu10bt3.cloudfront.net": 2
+    }
+  }
+]

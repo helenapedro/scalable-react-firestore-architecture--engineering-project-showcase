@@ -36,6 +36,36 @@
   border-top-right-radius: 0;
 }
 
+.cardImageButton {
+  aspect-ratio: 16 / 9;
+  background: #eef2f7;
+  border: 0;
+  cursor: pointer;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+.cardPreviewImage {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+  width: 100%;
+}
+
+.cardImageButton:hover .cardPreviewImage,
+.cardImageButton:focus-visible .cardPreviewImage {
+  transform: scale(1.03);
+}
+
+.cardImageButton:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: -3px;
+}
+
 .cardHeader {
   background:
     linear-gradient(180deg, #ffffff 0%, var(--color-panel-soft) 100%);
@@ -188,6 +218,123 @@
   gap: 0.65rem;
 }
 
+.homeLoadingIntro,
+.homeLoadingFeature,
+.homeLoadingCard {
+  background: linear-gradient(160deg, #ffffff 0%, var(--color-panel-soft) 100%);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--box-shadow-soft);
+  overflow: hidden;
+}
+
+.homeLoadingIntro {
+  align-items: center;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(8rem, 12rem) 1fr;
+  margin-bottom: 1.5rem;
+  min-height: 17rem;
+  padding: 2rem;
+}
+
+.homeLoadingAvatar,
+.homeLoadingCopy span,
+.homeLoadingFeature,
+.homeLoadingCardHeader span,
+.homeLoadingCardImage,
+.homeLoadingCardAction {
+  animation: homepageSkeletonPulse 1.4s ease-in-out infinite;
+  background: linear-gradient(90deg, #e5eaf1 0%, #f5f7fa 45%, #e5eaf1 100%);
+  background-size: 200% 100%;
+}
+
+.homeLoadingAvatar {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  justify-self: center;
+  max-width: 11rem;
+  width: 70%;
+}
+
+.homeLoadingCopy {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.homeLoadingCopy span,
+.homeLoadingCardHeader span {
+  border-radius: 999px;
+  display: block;
+  height: 1rem;
+}
+
+.homeLoadingCopy span:nth-child(1) {
+  width: min(24rem, 80%);
+}
+
+.homeLoadingCopy span:nth-child(2) {
+  width: min(32rem, 95%);
+}
+
+.homeLoadingCopy span:nth-child(3) {
+  width: min(28rem, 85%);
+}
+
+.homeLoadingFeature {
+  aspect-ratio: 16 / 5;
+  margin-bottom: 1.25rem;
+  min-height: 13rem;
+}
+
+.homeLoadingCard {
+  margin-bottom: 1rem;
+}
+
+.homeLoadingCardHeader {
+  display: grid;
+  gap: 0.65rem;
+  min-height: 9.25rem;
+  padding: 1rem;
+}
+
+.homeLoadingCardHeader span:nth-child(1) {
+  height: 1.35rem;
+  margin: 0 auto;
+  width: 78%;
+}
+
+.homeLoadingCardHeader span:nth-child(2) {
+  margin: 0 auto;
+  width: 62%;
+}
+
+.homeLoadingCardHeader span:nth-child(3) {
+  margin: 0 auto;
+  width: 48%;
+}
+
+.homeLoadingCardImage {
+  aspect-ratio: 16 / 9;
+}
+
+.homeLoadingCardAction {
+  border-radius: 999px;
+  height: 2.35rem;
+  margin: 1rem auto;
+  width: 8.5rem;
+}
+
+@keyframes homepageSkeletonPulse {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 @media (max-width: 768px) {
   .cardContainer:hover {
     transform: none;
@@ -198,7 +345,7 @@
   }
 
   .cardContainer img {
-    height: 220px;
+    height: 100%;
   }
 
   .featuredMediaVideoWrapper {
@@ -207,5 +354,19 @@
 
   .featuredMediaTitle {
     font-size: 1.35rem;
+  }
+
+  .homeLoadingIntro {
+    grid-template-columns: 1fr;
+    min-height: 21rem;
+    padding: 1.25rem;
+  }
+
+  .homeLoadingCopy span {
+    margin: 0 auto;
+  }
+
+  .homeLoadingFeature {
+    aspect-ratio: 4 / 3;
   }
 }

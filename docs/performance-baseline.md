@@ -360,6 +360,40 @@ Method:
 - CloudFront delivery remains active through `dh09x5tu10bt3.cloudfront.net`.
 - Homepage remains out of scope for this cleanup and still needs a separate image-loading pass.
 
+## Homepage Local Verification: Preview Cards and CLS Hardening
+
+Method:
+
+- Disabled automatic Hostinger deployment by making the deploy workflow manual-only.
+- Replaced homepage project-card carousels with one preview image per card.
+- Added lazy loading and async decoding to homepage project previews.
+- Added explicit owner image dimensions and a structured homepage loading skeleton to reserve layout space while Firestore data loads.
+- Built locally with `npm run build`.
+- Served the build at `http://localhost:4173`.
+- Re-ran `scripts/measure-production-performance.mjs` with:
+  - `PERF_BASE_URL=http://localhost:4173`
+  - `PERF_REPORT_LABEL=local-homepage-preview-cls`
+- Reports:
+  - `docs/performance-reports/local-homepage-preview-cls-performance-summary.json`
+  - `docs/performance-reports/local-homepage-preview-cls-performance-cdp.json`
+
+### Homepage Before vs Local Optimized
+
+| State | FCP | LCP | TBT Approx. | CLS | Requests | Transfer | Image Requests | DOM Images | Lazy Images | Async Images |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Production before homepage work | 2,428 ms | 4,964 ms | 1,008 ms | 0.8578 | 106 | 11,046,050 bytes | 74 | 73 | 0 | 0 |
+| Local preview cards before skeleton | 552 ms | 4,800 ms | 1,692 ms | 0.8119 | 34 | 2,993,739 bytes | 2 | 9 | 8 | 9 |
+| Local preview cards + skeleton | 520 ms | 3,928 ms | 401 ms | 0.0005 | 34 | 2,927,216 bytes | 2 | 9 | 8 | 9 |
+
+### Homepage Result
+
+- Homepage image requests dropped from 74 to 2 in the measured local build.
+- Homepage DOM images dropped from 73 to 9.
+- Homepage transferred bytes dropped from about 11.0 MB to about 2.9 MB.
+- Homepage CLS dropped from about 0.86 to 0.0005 after replacing the one-line loading state with a layout-preserving skeleton.
+- Project detail route gallery behavior remained unchanged in the local verification: 6 lazy gallery images and 7 async rendered images on the renovation route.
+- Hostinger was not deployed during this verification; production still requires a manual upload/deploy when ready.
+
 ## Routes to Measure
 
 Use one homepage route, one listing route, and at least two image-heavy project detail routes.

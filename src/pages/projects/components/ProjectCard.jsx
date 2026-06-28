@@ -4,8 +4,9 @@ import { Card, Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import * as iconsfa from "react-icons/fa";
-import ProjectCarousel from "../../../components/project/ProjectCarousel";
+import { getProjectImageFullRef } from "../../../components/project/projectMedia";
 import { wrapNumbersWithClass } from "../../../utils/WrapNumbers";
+import { resolveAssetUrl } from "../../../utils/assetUrl";
 import styles from "../ProjectContainer.module.css";
 import prodetailsstyles from "../../../components/ui/ProjectDetails.module.css";
 import { getLanguageFromPath, routePath } from "../../../i18n/routes";
@@ -13,6 +14,10 @@ import { getLanguageFromPath, routePath } from "../../../i18n/routes";
 const ProjectCard = ({ project, categoryName, onOpenImage }) => {
   const { t } = useTranslation();
   const language = getLanguageFromPath(window.location.pathname);
+  const previewRef =
+    getProjectImageFullRef(project.media?.mainImage) ||
+    getProjectImageFullRef(project.media?.images?.[0]);
+  const previewUrl = resolveAssetUrl(previewRef);
 
   return (
     <Col md={6} style={{ marginBottom: "1rem" }}>
@@ -36,12 +41,21 @@ const ProjectCard = ({ project, categoryName, onOpenImage }) => {
           </Card.Subtitle>
         </Card.Header>
 
-        {project.media?.images && project.media.images.length > 0 && (
-          <ProjectCarousel
-            images={project.media.images}
-            title={project.title}
-            onImageClick={onOpenImage}
-          />
+        {previewUrl && (
+          <button
+            type="button"
+            className={styles.cardImageButton}
+            onClick={() => onOpenImage(previewRef)}
+            aria-label={t("common.viewImage")}
+          >
+            <img
+              src={previewUrl}
+              alt={`${project.title} preview`}
+              className={styles.cardPreviewImage}
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
         )}
 
         <Card.Body>
@@ -66,7 +80,8 @@ ProjectCard.propTypes = {
       label: PropTypes.string,
     }),
     media: PropTypes.shape({
-      images: PropTypes.arrayOf(PropTypes.string),
+      mainImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+      images: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
     }),
   }).isRequired,
   categoryName: PropTypes.string.isRequired,

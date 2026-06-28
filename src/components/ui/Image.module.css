@@ -24,10 +24,14 @@
 }
 
 .heroImage {
+  aspect-ratio: 1 / 1;
   border: 3px solid #ffffff;
   border-radius: 50%;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  display: block;
+  height: auto;
   max-width: 180px;
+  object-fit: cover;
   overflow: hidden;
   width: min(180px, 70vw);
 }
